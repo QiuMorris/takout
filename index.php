@@ -1,0 +1,401 @@
+<?php
+session_start();
+include_once 'comm/MysqliModel.class.php';
+include_once 'comm/dbconfig.php';
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/iscroll.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+    <script src="js/hmt.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/swiper.min.js" type="text/javascript" ></script>
+</head>
+
+<body>
+<header class="hasManyCity" id="header">
+    <div id="" class="cityBtn">重庆</div>
+    <div id="locaitonBtn" class="link-url locaitonBtn"></div>
+    <div id="" class="searchBox">
+        <span>欢迎来到食刻外卖</span>
+    </div>
+    <div id="" class="qrcodeBtn"></div>
+</header>
+<div id="container">
+    <div id="main">
+        <div id="scroller">
+            <section class="banner">
+                <div class="swiper-container swiper-container1">
+                    <div class="swiper-wrapper bannerwidth">
+                        <div class="swiper-slide swiper-slide-duplicate">
+                            <a href="#">
+                                <img src="img/55dec2a5c2fa3.png">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="img/55dec2a5c2fa3.png">
+                            </a>
+                        </div>
+                        <div class="swiper-slide swiper-slide-duplicate">
+                            <a href="#">
+                                <img src="img/55dec2a5c2fa3.png">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="img/55dec2a5c2fa3.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination swiper-pagination1">
+                    </div>
+                </div>
+            </section>
+
+            <section class="slider">
+                <div class="swiper-container swiper-container2">
+                    <div class="swiper-wrapper tuangouwidth">
+                        <div class="swiper-slide swiper-slide-duplicate">
+                            <ul class="icon-list">
+                                <li class="icon">
+                                    <a href="tuan.php">
+												<span class="icon-circle">
+													<img src="img/a1.png">
+												</span>
+                                        <span class="icon-desc">美食</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="tuan.php">
+												<span class="icon-circle">
+													<img src="img/a2.png">
+												</span>
+                                        <span class="icon-desc">果蔬生鲜</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="rush.html">
+												<span class="icon-circle">
+													<img src="img/a3.png">
+												</span>
+                                        <span class="icon-desc">下午茶</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="indiana.html">
+												<span class="icon-circle">
+													<img src="img/a4.png">
+												</span>
+                                        <span class="icon-desc">麻辣烫</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="yule.html">
+												<span class="icon-circle">
+													<img src="img/a5.png">
+												</span>
+                                        <span class="icon-desc">披萨意面</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="hotel.html">
+												<span class="icon-circle">
+													<img src="img/a6.png">
+												</span>
+                                        <span class="icon-desc">川菜</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="tourism.html">
+												<span class="icon-circle">
+													<img src="img/a7.png">
+												</span>
+                                        <span class="icon-desc">粤菜</span>
+                                    </a>
+                                </li>
+                                <li class="icon">
+                                    <a href="piaowu.html">
+												<span class="icon-circle">
+													<img src="img/a8.png">
+												</span>
+                                        <span class="icon-desc">杭帮菜</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="index" class="page-center-box">
+            <div>
+                <!--热门商家-->
+                <div class="sy_title">
+                    <span class="left">热门商家</span>
+                    <a href="remen.html" class="fr morethree">更多&gt;&gt;</a>
+                </div>
+                <div class="sy_hot_seller">
+                    <div class="sy_limit_buy mb10">
+                        <div class="locatLabel_switch swiper-container6 swiper-container-horizontal swiper-container-free-mode swiper-container-android">
+                            <div class="swiper-wrapper">
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                                <div class="box swiper-slide">
+                                    <a href="#">
+                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
+                                        <p class="txt_center overflow_clear">菲诗小铺</p>
+                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--热门商家end-->
+
+                <!--专享推荐-->
+                <div class="sy_title mb10">
+                    <span class="left">热门推荐</span>
+                    <a href="#" class="fr morethree">更多&gt;&gt;</a>
+                </div>
+                <div class="sy_recmd">
+                    <div class="sy_recmd_list_box">
+                        <ul>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="sy_recmd_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                    </div>
+                                    <div class="pub_wz">
+                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <div class="nr_box">
+                                            <p class="fl fontcl2">¥25</p>
+                                            <span class="fl black9">[优惠活动]</span>
+                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <!--专享推荐end-->
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div>
+        <a href="index.php">
+            <div class="icon i-1 on"><img src="img/homepage.png" width="22"></div>
+            <p>首页</p>
+        </a>
+    </div>
+    <div>
+        <a href="rush.php">
+            <div class="icon i-2"><img src="img/recomnd.png" width="25"></div>
+            <p>推荐</p>
+        </a>
+    </div>
+    <div>
+        <a href="order.php">
+            <div class="icon i-3"><img src="img/order.png" width="22"></div>
+            <p>订单</p>
+        </a>
+    </div>
+    <div>
+        <a href="center.php">
+            <div class="icon i-4"><img src="img/mine.png" width="22"></div>
+            <p>我的</p>
+        </a>
+    </div>
+</footer>
+
+</body>
+<script src="js/other.js" type="text/javascript" charset="utf-8"></script>
+</html>
