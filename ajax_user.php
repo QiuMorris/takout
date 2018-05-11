@@ -1,10 +1,11 @@
 <?php
 session_start();
-include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+include_once 'comm/MysqliModel.class.php';
 
 
-$mod_customer =new MysqliModel('customer');
+
+$mod_customer = new MysqliModel('customer');
 
 
 if($_GET['act']=='add_user')
@@ -49,7 +50,6 @@ else if($_GET['act']=='login')
     $data['cus_password']=md5($_POST['cus_password']);
 
     $recus=$mod_customer->where(array('cus_tel'=>$_POST['cus_tel'],'cus_password'=>$data['cus_password']))->selectOne();
-
 
     if($recus )
     {
@@ -101,41 +101,65 @@ else if($_GET['act']=='getuseraddress')
     $jsonArr["msg"]="成功";
     $jsonArr["code"]=200;
 
-    // $recus=$mod_customer->where(array('id'=>$_POST['id']))->selectOne();
-    // if($recus)
-    // {
-    //     $jsonArr["data"]=$recus;
-    // }
 
     echo json_encode($jsonArr);
 
     exit;
 }
-else if($_GET['act']=='getuseraddresslist')
+
+else if($_GET['act'] == 'getuseraddresslist')
 {
     $jsonArr=array ();
     $jsonArr["msg"]="成功";
     $jsonArr["code"]=200;
 
-    // $recus=$mod_customer->where(array('id'=>$_POST['id']))->selectOne();
+    $mod_address = new MysqliModel('address');
+
+    // $recus=$mod_customer->where(array('id'=>$_POST['id']))->selectOne(); //一条
+    $recus=$mod_address->where(array('cou_id'=>$_SESSION['user']['cus_id']))->select();  //全部
     // if($recus)
     // {
     //     $jsonArr["data"]=$recus;
     // }
 
     echo json_encode($jsonArr);
-
     exit;
 }
+
+else if($_GET['act'] == 'add_address') {
+    $jsonArr=array ();
+    $jsonArr["msg"]="错误";
+    $jsonArr["code"]=400;
+
+    $data['cus_id']=$_SESSION['user']['cus_id'];
+    $data['cus_tel']=$_POST['cus_tel'];
+    $data['cus_name']=$_POST['cus_name'];
+    $data['cus_address']=$_POST['cus_address'];
+    $data['is_default']=0;
+
+    $mod_address = new MysqliModel('address');
+    $re=$mod_address->insert($data);
+
+    if($re)
+    {
+        $jsonArr["msg"]="添加地址成功";
+        $jsonArr["code"]=200;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+
 else {
     
     $jsonArr=array ();
-    $jsonArr["msg"]="成功";
-    $jsonArr["code"]=200;
+    $jsonArr["msg"]="400";
+    $jsonArr["code"]=400;
 
     echo json_encode($jsonArr);
 
     exit;
 }
+
 
 

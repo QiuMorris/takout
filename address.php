@@ -1,7 +1,13 @@
 <?php
 session_start();
-include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+include_once 'comm/MysqliModel.class.php';
+
+
+$mod_address = new MysqliModel('address');
+$arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->select();  //全部
+
+
 ?>
 
 <!DOCTYPE html>
@@ -36,15 +42,17 @@ include_once 'comm/dbconfig.php';
 		</header>
 		<div id="container">
 		    <div id="main" class="mui-clearfix contaniner">
-		    	<div class="addlist clearfloat">
+
+                <?php foreach ($arr_address as $k=>$valaddress ):?>
+                <div class="addlist clearfloat">
 		    		<div class="top clearfloat box-s">
 		    			<ul>
 		    				<li>
-		    					<span class="fl">裘实</span>
-		    					<span class="fr">1303505****</span>
+		    					<span class="fl"><?php echo $valaddress['cus_name']?></span>
+		    					<span class="fr"><?php echo $valaddress['cus_tel']?></span>
 		    				</li>
 		    				<li>
-                                重庆市巴南区红光大道69号重庆理工大学
+                                <?php echo $valaddress['cus_address']?>
 		    				</li>
 		    			</ul>
 		    		</div>
@@ -54,13 +62,13 @@ include_once 'comm/dbconfig.php';
 								<div class="xuan xuantwo clearfloat fl">
 				    				<div class="radio" >
 									    <label>
-									        <input type="checkbox" name="sex" value="" />
+									        <input type="checkbox" name="is_" value="" />
 									        <div class="option"></div>
 									    </label>
 									</div>
 				    			</div>
 
-							<span class="mradd fl"><input name="save" id="save" type="checkbox" checked>                                        默认地址</span>
+							<span class="mradd fl"><input name="save" id="save" type="checkbox" <?php if($valaddress['is_default']==1){?>checked<?php }?>>                                        默认地址</span>
 							<div class="right fr clearfloat">
 								<a href="#" class="fr">
 									<img src="img/delete.png" width="23">删除
@@ -73,81 +81,11 @@ include_once 'comm/dbconfig.php';
 						</section>
 		    		</div>
 		    	</div>
+                <?php endforeach?>
 
-		    	<div class="addlist clearfloat">
-		    		<div class="top clearfloat box-s">
-		    			<ul>
-		    				<li>
-		    					<span class="fl">裘实</span>
-		    					<span class="fr">1303505****</span>
-		    				</li>
-		    				<li>
-                                重庆市巴南区红光大道69号重庆理工大学
-		    				</li>
-		    			</ul>
-		    		</div>
-		    		<div class="bottom clearfloat box-s">
-		    			<section class="shopcar clearfloat">
-		    				<div class="list listtwo clearfloat">
-								<div class="xuan xuantwo clearfloat fl">
-				    				<div class="radio" >
-									    <label>
-									        <input type="checkbox" name="sex" value="" />
-									        <div class="option"></div>
-									    </label>
-									</div>
-				    			</div>
-							<span class="mradd fl"><input name="save" id="save" type="checkbox" >默认地址</span>
-							<div class="right fr clearfloat">
-								<a href="#" class="fr">
-									<img src="img/delete.png" width="23">删除
-								</a>
-								<a href="change_address.php" class="fr">
-									<img src="img/write.png" width="21">编辑
-								</a>
-							</div>
-							</div>
-						</section>
-		    		</div>
-		    	</div>
 
-		    	<div class="addlist clearfloat">
-		    		<div class="top clearfloat box-s">
-		    			<ul>
-		    				<li>
-		    					<span class="fl">裘实</span>
-		    					<span class="fr">1303505****</span>
-		    				</li>
-		    				<li>
-                                重庆市巴南区红光大道69号重庆理工大学
-		    				</li>
-		    			</ul>
-		    		</div>
-		    		<div class="bottom clearfloat box-s">
-		    			<section class="shopcar clearfloat">
-		    				<div class="list listtwo clearfloat">
-								<div class="xuan xuantwo clearfloat fl">
-				    				<div class="radio" >
-									    <label>
-									        <input type="checkbox" name="sex" value="" />
-									        <div class="option"></div>
-									    </label>
-									</div>
-				    			</div>
 
-							<span class="mradd fl"><input name="save" id="save" type="checkbox">默认地址</span>
-							<div class="right fr clearfloat">
-								<a href="#" class="fr">
-									<img src="img/delete.png" width="23">删除
-								</a>
-								<a href="change_address.php" class="fr">
-									<img src="img/write.png" width="21">编辑
-								</a>
-							</div>
-							</div>
-						</section>
-		    		</div>
-		    	</div>
+
 
 		    </div>
 		    <a href="add_address.php" class="address-add fl">

@@ -51,10 +51,8 @@ if(!$_SESSION['user'])
                 </div>
             </div>
 
-
             <div class="cashlist clearfloat">
                 <ul>
-
                     <li class="box-s" style="display: none">
                         <a href="#">
                             <p class="fl">浏览历史</p>

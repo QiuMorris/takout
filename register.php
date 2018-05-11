@@ -18,8 +18,6 @@ include_once 'comm/dbconfig.php';
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name='apple-touch-fullscreen' content='yes'>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
     <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
@@ -193,7 +191,7 @@ include_once 'comm/dbconfig.php';
                         window.location.href = "/login.php";
                     }
                     else {
-                        alert(data.msg);
+                       layer.msg(data.msg);
                     }
                 },"JSON");
         });

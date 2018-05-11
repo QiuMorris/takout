@@ -11,7 +11,6 @@
     <meta name='apple-touch-fullscreen' content='yes'>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="icon" href="//p1.meituan.net/codeman/44f8f3736d61a550dc0fa7bc1a70b6056518.ico" type="image/x-icon" />
-
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="address=no">
     <meta name="for" content="meituan.com">
@@ -33,7 +32,6 @@
     </style>
 
     <link href="css/eve.a4872f12.css" rel="stylesheet" onload="MT.pageData.eveTime=Date.now()" />
-
     <link href="css/login-wm.10a0cb5a.css" rel="stylesheet" onload="MT.pageData.eveTime=Date.now()" />
     <style>
         .nav {
