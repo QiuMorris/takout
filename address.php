@@ -6,8 +6,6 @@ include_once 'comm/MysqliModel.class.php';
 
 $mod_address = new MysqliModel('address');
 $arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->select();  //全部
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +23,7 @@ $arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
 		<link rel="stylesheet" href="css/reset.css">
-		<script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/iscroll.js"></script>
 		<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
@@ -82,9 +80,6 @@ $arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->
 		    		</div>
 		    	</div>
                 <?php endforeach?>
-
-
-
 
 
 		    </div>

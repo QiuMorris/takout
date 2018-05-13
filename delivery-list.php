@@ -1,7 +1,12 @@
 <?php
 session_start();
-include_once 'comm/MysqliModel.class.php';
+
 include_once 'comm/dbconfig.php';
+include_once 'comm/MysqliModel.class.php';
+
+
+$mod_food = new MysqliModel('food');
+$arr_food = $mod_food->select();
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +24,11 @@ include_once 'comm/dbconfig.php';
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
+    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
+    <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
+
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
@@ -36,7 +44,7 @@ include_once 'comm/dbconfig.php';
         <div class="store-header clearfix">
             <div class="tu">
                 <span></span>
-                <img src="img/tou.png"/>
+                <img src="img/food.PNG"/>
             </div>
             <div class="right fl">
                 <p>正新鸡排大洋百货店</p>
@@ -74,125 +82,42 @@ include_once 'comm/dbconfig.php';
                 </ul>
             </div>
             <div class="frame-set-right">
+
+                <?php foreach ($arr_food as $k=>$valfood ):?>
                 <div class="list-have-pic list-have-pictwo">
                     <div class="eleList_box">
                         <div class="list-box cate_2">
                             <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
+                                <img src="<?php echo $valfood['food_jpg']?>">
                             </div>
                             <div class="list-content">
-                                <p class="overflow_clear">鱼香肉丝</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">11.5元</p>
+                                <p class="overflow_clear"><?php echo $valfood['food_name']?></p>
+                                <p class="overflow_clear"><?php echo $valfood['food_sale']?></p>
+                                <p class="price fontcl1"><?php echo $valfood['food_price']?></p>
+
                                 <div class="num-input">
-                                    <div class="btn jq_jian" val="11.5" did="2" onclick="dec(this);">-</div>
+                                    <div class="btn jq_jian" val="11.5" did="2" onclick="addcart(<?php echo $valfood['food_id']?>,'del');">-</div>
                                     <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="11.5" did="2" onclick="addcart(this);">+</div>
+                                    <div class="btn active jq_addcart" val="11.5" did="2" onclick="addcart(<?php echo $valfood['food_id']?>,'add');">+</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="list-box cate_1">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">毛豆炸酱</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">15元</p>
-                                <div class="num-input">
-                                    <div class="btn jq_jian" val="15" did="1" onclick="dec(this);">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="15" did="1" onclick="addcart(this);">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-box cate_1">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">毛豆炸酱</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">15元</p>
-                                <div class="num-input">
-                                    <div class="btn jq_jian" val="15" did="1" onclick="dec(this);">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="15" did="1" onclick="addcart(this);">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-box cate_1">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">毛豆炸酱</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">15元</p>
-                                <div class="num-input">
-                                    <div class="btn jq_jian" val="15" did="1" onclick="dec(this);">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="15" did="1" onclick="addcart(this);">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-box cate_1">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">毛豆炸酱</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">15元</p>
-                                <div class="num-input">
-                                    <div class="btn jq_jian" val="15" did="1" onclick="dec(this);">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="15" did="1" onclick="addcart(this);">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-box cate_1">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">毛豆炸酱</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">15元</p>
-                                <div class="num-input">
-                                    <div class="btn jq_jian" val="15" did="1" onclick="dec(this);">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="15" did="1" onclick="addcart(this);">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-box cate_1">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">毛豆炸酱</p>
-                                <p class="overflow_clear">在线支付满20元立减5元</p>
-                                <p class="price fontcl1">15元</p>
-                                <div class="num-input">
-                                    <div class="btn jq_jian" val="15" did="1" onclick="dec(this);">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
-                                    <div class="btn active jq_addcart" val="15" did="1" onclick="addcart(this);">+</div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
+                <?php endforeach?>
+
             </div>
         </div>
         <footer class="footer-cart eleFooter-cart" id="footer">
             <div class="cart">
                 <a id="cart_1" href="javascript:void(0);">
-                    <div class="cart-num" id="num">2</div>
+<!--                    <div class="cart-num" id="num">2</div>-->
+                    <img src="/img/myshopcar.png" width="30">
                 </a>
             </div>
             <div class="price">￥<span id="total_price">0.00</span>
-                <p>(30元起送,配送费:￥2)</p>
+                <p>(30元起送)</p>
             </div>
             <div id="cart_2" class="disable">
                 <a href="wmai.php" style="color:#FFFFFF;">确认下单</a>
@@ -200,6 +125,25 @@ include_once 'comm/dbconfig.php';
         </footer>
     </div>
 </div>
+
+<script>
+    function addcart(id,c) {
+        $.post("ajax_shopcar.php?act=cart",
+            {
+                food_id:id,
+                oper:c
+            },
+            function(data,status){
+                if(data.code == 200) {
+                    layer.msg(data.msg)
+                }
+                else {
+                    layer.msg(data.msg)
+                }
+            },"JSON");
+    }
+</script>
+
 </body>
 </html>
 

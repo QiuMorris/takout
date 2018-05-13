@@ -29,7 +29,7 @@ include_once 'comm/MysqliModel.class.php';
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a><i class="iconfont icon-fanhui"><img src="img/icon_login_user@2x.png" width="20" style="margin-top: 16px;"></i></a>
+    <a><img src="img/icon_login_user@2x.png" width="20" style="margin-top: 16px;"></a>
     <div class="header-tit">
         开工ing
     </div>
@@ -76,7 +76,7 @@ include_once 'comm/MysqliModel.class.php';
                             </div>
 
                             <div class="coupon ">
-                                <table border="1">
+                                <table>
                                     <tr>
                                         <th><div><img src="img/telphone.png" width="20" style="margin-top: 5px; margin-left: 20px;"></div></th>
                                         <th><a style="width:auto; margin-left: 15px; margin-right: 10px">联系商户</a></th>

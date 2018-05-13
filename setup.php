@@ -59,7 +59,7 @@ include_once 'comm/dbconfig.php';
                 </li>
 
                 <li class="clearfloat">
-                    <a href="address.html">
+                    <a href="address.php">
                         <p class="fl">收货地址</p>
                         <span class="fr">重庆市高新区</span>
                     </a>
