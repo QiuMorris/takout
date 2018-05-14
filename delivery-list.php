@@ -32,7 +32,7 @@ $arr_food = $mod_food->select();
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a href="javascript:history.go(-1)" class="fl fanhui"><img src="img/back.png" width="20" href="tuan.php"></a>
+    <a href="javascript:history.go(-1)" class="fl fanhui"><img src="img/back.png" width="20"></a>
     <div class="header-tit">
         店铺菜单
     </div>
@@ -97,7 +97,7 @@ $arr_food = $mod_food->select();
 
                                 <div class="num-input">
                                     <div class="btn jq_jian" val="11.5" did="2" onclick="addcart(<?php echo $valfood['food_id']?>,'del');">-</div>
-                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0"></div>
+                                    <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0" id="num<?php echo $valfood['food_id']?>"></div>
                                     <div class="btn active jq_addcart" val="11.5" did="2" onclick="addcart(<?php echo $valfood['food_id']?>,'add');">+</div>
                                 </div>
                             </div>
@@ -135,7 +135,9 @@ $arr_food = $mod_food->select();
             },
             function(data,status){
                 if(data.code == 200) {
-                    layer.msg(data.msg)
+
+                    $("#num"+id+"").val(data.sum);
+                    layer.msg(data.msg);
                 }
                 else {
                     layer.msg(data.msg)
