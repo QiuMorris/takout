@@ -60,7 +60,6 @@ if ($_GET['act']=='cart') {
 
     }
 
-
         $jsonArr["msg"]="操作成功";
         $jsonArr["code"]=200;
         $jsonArr["sum"]=$sum;
