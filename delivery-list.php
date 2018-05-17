@@ -120,7 +120,7 @@ $arr_food = $mod_food->select();
                 <p>(30元起送)</p>
             </div>
             <div id="cart_2" class="disable">
-                <a href="wmai.php" style="color:#FFFFFF;">确认下单</a>
+                <a href="update_order.php" style="color:#FFFFFF;">确认下单</a>
             </div>
         </footer>
     </div>

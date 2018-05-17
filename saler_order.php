@@ -37,9 +37,9 @@ include_once 'comm/dbconfig.php';
 
 <div class="screening">
     <ul>
-        <li class="Newband">新订单 </li>
-        <li class="Waiting">处理中 </li>
-        <li class="Delivering">已打印 </li>
+        <li class="Newband"><a href="saler_order.php" >新订单</a></li>
+        <li class="Waiting"><a href="saler_order1.php">处理中</a></li>
+        <li class="Delivering"><a href="saler_order2.php">已打印</a></li>
     </ul>
 </div>
 

@@ -70,9 +70,9 @@ include_once 'comm/dbconfig.php';
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a class="fl fanhui" href="center.php"><img src="img/backw.png" width="20" ></a>
+    <a class="fl fanhui" href="saler_homepage.php"><img src="img/backw.png" width="20" ></a>
     <div class="header-tit">
-        商家入驻
+        我的店铺信息
     </div>
 </header>
 <div id="container">
@@ -87,11 +87,11 @@ include_once 'comm/dbconfig.php';
                     <ul>
                         <li class="fl ra3" id="test1">
                             <img src="img/jia.png"  width="30">
-                            <p>添加营业执照</p>
+                            <p>更新营业执照</p>
                         </li>
                         <li class="fr ra3" id="test2">
                             <img src="img/jia.png" width="30">
-                            <p>添加法人身份证</p>
+                            <p>更新法人身份证</p>
                         </li>
                     </ul>
                 </div>
@@ -130,10 +130,11 @@ include_once 'comm/dbconfig.php';
                     </ul>
                 </div>
 
-                <a href="#" class="center-btn db ra3">提交</a>
+                <a href="#" class="center-btn db ra3">提交修改</a>
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+

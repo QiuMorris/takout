@@ -57,13 +57,13 @@ include_once 'comm/dbconfig.php';
                             </a>
                         </li>
                         <li>
-                            <a href="hotel-order.html">
+                            <a href="saler_thingManage.php">
                                 <img src="img/smanage.png" width="30" height="30"/>
                                 <span>商品管理</span>
                             </a>
                         </li>
                         <li>
-                            <a href="jifen-order.html">
+                            <a href="store_info.php">
                                 <img src="img/group3.png" width="30" height="30"/>
                                 <span>门店信息</span>
                             </a>
