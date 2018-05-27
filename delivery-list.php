@@ -126,6 +126,15 @@ $arr_food = $mod_food->select();
     </div>
 </div>
 
+<style>
+    .order_button a{
+        display: block;
+        color: #fff;
+        background-color: #F19149;
+        text-align: center;
+    }
+</style>
+
 <script>
     function addcart(id,c) {
         $.post("ajax_shopcar.php?act=cart",
@@ -137,7 +146,14 @@ $arr_food = $mod_food->select();
                 if(data.code == 200) {
 
                     $("#num"+id+"").val(data.sum);
-                    layer.msg(data.msg);
+                    $("#total_price").html(data.sumPrice);
+
+                    if(data.sumPrice == 0) {
+                        $("#cart_2").removeClass("order_button");
+                    }else {
+                        $("#cart_2").addClass("order_button");
+                    }
+
                 }
                 else {
                     layer.msg(data.msg)

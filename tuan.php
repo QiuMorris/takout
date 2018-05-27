@@ -363,12 +363,6 @@ include_once 'comm/dbconfig.php';
         </a>
     </div>
     <div>
-        <a href="rush.php">
-            <div class="icon i-2"><img src="img/recomnd.png" width="25"></div>
-            <p>推荐</p>
-        </a>
-    </div>
-    <div>
         <a href="order.php">
             <div class="icon i-3"><img src="img/order.png" width="22"></div>
             <p>订单</p>

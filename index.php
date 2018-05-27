@@ -144,92 +144,7 @@ include_once 'comm/dbconfig.php';
             </section>
         </div>
 
-        <div id="index" class="page-center-box">
-            <div>
-                <!--热门商家-->
-                <div class="sy_title">
-                    <span class="left">热门商家</span>
-                    <a href="remen.html" class="fr morethree">更多&gt;&gt;</a>
-                </div>
-                <div class="sy_hot_seller">
-                    <div class="sy_limit_buy mb10">
-                        <div class="locatLabel_switch swiper-container6 swiper-container-horizontal swiper-container-free-mode swiper-container-android">
-                            <div class="swiper-wrapper">
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                                <div class="box swiper-slide">
-                                    <a href="#">
-                                        <img src="img/thumb_5745110bbc27c.jpg" width="114" height="114">
-                                        <p class="txt_center overflow_clear">菲诗小铺</p>
-                                        <p class="fontcl2">2人关注<small class="ml10 fr black9">已售0</small></p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--热门商家end-->
+
 
                 <!--专享推荐-->
                 <div class="sy_title mb10">
@@ -374,12 +289,6 @@ include_once 'comm/dbconfig.php';
         <a href="index.php">
             <div class="icon i-1 on"><img src="img/homepage.png" width="22"></div>
             <p>首页</p>
-        </a>
-    </div>
-    <div>
-        <a href="rush.php">
-            <div class="icon i-2"><img src="img/recomnd.png" width="25"></div>
-            <p>推荐</p>
         </a>
     </div>
     <div>

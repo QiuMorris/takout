@@ -2,6 +2,11 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+
+$mod_address = new MysqliModel('address');//实例化
+$readdress=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id'], 'is_default'=>1))->selectOne();
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,26 @@ include_once 'comm/dbconfig.php';
 <div id="container">
     <div id="main">
         <form class="wrapper-list">
-            <h4 style="text-align: center;"><a href="address.php"><img src="img/jia.png" width="20" style="margin-right: 5px;">添加收货地址</a></h4>
+            <h4 style="text-align: center;">
+
+                <a href="select_address.php"><img src="img/jia.png" width="20" style="margin-right: 5px;">添加收货地址</a>
+            </h4>
+            <dl class="list">
+                <dd>
+                    <dl>
+                        <dd class="dd-padding kv-line-r">
+                            <p>收货人姓名：<?php echo $readdress['cus_name']?></p>
+                        </dd>
+                        <dd class="dd-padding kv-line-r">
+                            <p>收货人电话：<?php echo $readdress['cus_tel']?></p>
+                        </dd>
+                        <dd class="dd-padding kv-line-r">
+                            <p>收货人地址：<?php echo $readdress['cus_address']?></p>
+                        </dd>
+                    </dl>
+                </dd>
+            </dl>
+
             <dl class="list">
                 <dd>
                     <dl>
@@ -82,10 +106,10 @@ include_once 'comm/dbconfig.php';
                 </dd>
             </dl>
             <div class="btn-wrapper">
-                <a href="pay.html" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >提交订单</a>
+                <a href="pay.php" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >提交订单</a>
             </div>
             <div class="btn-wrapper">
-                <a href="pay.html" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >取消订单</a>
+                <a href="pay.php" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >取消订单</a>
             </div>
         </form>
     </div>

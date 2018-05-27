@@ -115,12 +115,7 @@ include_once 'comm/dbconfig.php';
                                 <input type="text" id="" value="" placeholder="" />
                             </div>
                         </li>
-                        <li>
-                            <div class="box-s clearfloat">
-                                <p>经验种类：</p>
-                                <input type="text" id="" value="" placeholder="" />
-                            </div>
-                        </li>
+
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家描述：</p>

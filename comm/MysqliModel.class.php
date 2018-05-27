@@ -580,4 +580,5 @@ class MysqliModel {
 		return $this;
 	}
 
+
 }

@@ -69,13 +69,13 @@ include_once 'comm/dbconfig.php';
                             </a>
                         </li>
                         <li>
-                            <a href="jifen-order.html">
+                            <a href="assess.php">
                                 <img src="img/pingjia.png" width="30" height="30"/>
                                 <span>用户评价</span>
                             </a>
                         </li>
                         <li>
-                            <a href="jifen-order.html">
+                            <a href="saler_wallet.php">
                                 <img src="img/wallet.png" width="30" height="30"/>
                                 <span>我的钱包</span>
                             </a>

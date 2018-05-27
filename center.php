@@ -78,6 +78,12 @@ if(!$_SESSION['user'])
                             <img src="/img/next.png" width="20" style="margin-left: 250px">
                         </a>
                     </li>
+                    <li class="box-s">
+                        <a href="setup.php">
+                            <p class="fl">我要开店</p>
+                            <img src="/img/next.png" width="20" style="margin-left: 250px">
+                        </a>
+                    </li>
                 </ul>
             </div>
             <a href="#" class="center-btn db ra3">退出登录</a>
@@ -90,12 +96,6 @@ if(!$_SESSION['user'])
         <a href="index.php">
             <div class="icon i-1 on"><img src="img/homepage.png" width="22"></div>
             <p>首页</p>
-        </a>
-    </div>
-    <div>
-        <a href="rush.php">
-            <div class="icon i-2"><img src="img/recomnd.png" width="25"></div>
-            <p>推荐</p>
         </a>
     </div>
     <div>
