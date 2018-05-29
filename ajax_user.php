@@ -149,7 +149,86 @@ else if($_GET['act'] == 'add_address') {
     echo json_encode($jsonArr);
     exit;
 }
+else if($_GET['act'] == 'change_address') {
+    $jsonArr=array ();
+    $jsonArr["msg"]="错误";
+    $jsonArr["code"]=400;
 
+   // $data['id']=$_POST['id'];
+    $data['cus_id']=$_SESSION['user']['cus_id'];
+    $data['cus_tel']=$_POST['cus_tel'];
+    $data['cus_name']=$_POST['cus_name'];
+    $data['cus_address']=$_POST['cus_address'];
+    $data['is_default']=0;
+
+    $mod_address = new MysqliModel('address');
+    $re=$mod_address->update($data,$_POST['id']);
+
+    if($re)
+    {
+        $jsonArr["msg"]="成功";
+        $jsonArr["code"]=200;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+
+else if($_GET['act'] == 'login_out') {
+    unset($_SESSION['user']);
+
+    $jsonArr=array ();
+    $jsonArr["msg"]="成功";
+    $jsonArr["code"]=200;
+
+    echo json_encode($jsonArr);
+    exit;
+}
+
+else if($_GET['act'] == 'upStoreuser') {
+
+    $jsonArr=array ();
+    $jsonArr["msg"]="成功";
+    $jsonArr["code"]=200;
+    $path=$_SERVER['DOCUMENT_ROOT'];
+
+    if($_FILES['file']['type']=="image/png")
+    {
+        $e_name=".png";
+    }
+    else
+    {
+        $e_name=".jpg";
+    }
+
+    $cupath="/upload/".time().$e_name; //存数据库
+
+    $newpath=$path.$cupath;
+    if(copy($_FILES['file']['tmp_name'],$newpath))
+    {
+        $jsonArr["msg"]="成功";
+        $jsonArr["code"]=200;
+    }
+    else
+    {
+        $jsonArr["msg"]="失败";
+        $jsonArr["code"]=400;
+    }
+
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'out_order') {
+    unset($_SESSION['cartlist']);
+
+    $jsonArr=array ();
+    $jsonArr["msg"]="成功";
+    $jsonArr["code"]=200;
+
+    echo json_encode($jsonArr);
+    exit;
+}
 
 else {
     
@@ -158,7 +237,6 @@ else {
     $jsonArr["code"]=400;
 
     echo json_encode($jsonArr);
-
     exit;
 }
 

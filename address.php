@@ -33,7 +33,7 @@ $arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->
 	</head>
 	<body>
 		<header class="hasManyCity hasManyCitytwo" id="header">
-			<a href="javascript:history.go(-1)" class="fl fanhui"><img src="img/back.png" width="20" href="center.php"></a>
+			<a href="center.php" class="fl fanhui"><img src="img/back.png" width="20" ></a>
 			<div class="header-tit">
                 管理收货地址
 			</div>

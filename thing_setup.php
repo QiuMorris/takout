@@ -80,10 +80,16 @@ include_once 'comm/dbconfig.php';
                     </a>
                 </li>
                 <li class="clearfloat">
-                    <a href="#">
-                        <p class="fl">商品分类</p>
-                        <input type="text" class="fr shuru" name="" id="" value="" placeholder="炒菜类"/>
-                    </a>
+<!--                    <a href="#">-->
+<!--                        <p class="fl">商品分类</p>-->
+<!--                        <input type="text" class="fr shuru" name="" id="" value="" placeholder="炒菜类"/>-->
+                        <select>
+                            <option value ="volvo">炒菜类</option>
+                            <option value ="saab">盖饭类</option>
+                            <option value="opel">下午茶</option>
+                            <option value="audi">口碑</option>
+                        </select>
+<!--                    </a>-->
                 </li>
                 <li class="clearfloat">
                     <a href="#">

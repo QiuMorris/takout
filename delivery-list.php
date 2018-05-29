@@ -6,7 +6,7 @@ include_once 'comm/MysqliModel.class.php';
 
 
 $mod_food = new MysqliModel('food');
-$arr_food = $mod_food->select();
+$arr_food = $mod_food->where(array('sel_id'=>$_GET['id']))->select();
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ $arr_food = $mod_food->select();
 
 <div id="container">
     <div id="main">
-        <!--店铺头部开始-->
+
         <div class="store-header clearfix">
             <div class="tu">
                 <span></span>
@@ -117,7 +117,7 @@ $arr_food = $mod_food->select();
                 </a>
             </div>
             <div class="price">￥<span id="total_price">0.00</span>
-                <p>(30元起送)</p>
+                <p>(配送费5元)</p>
             </div>
             <div id="cart_2" class="disable">
                 <a href="update_order.php" style="color:#FFFFFF;">确认下单</a>
@@ -144,7 +144,6 @@ $arr_food = $mod_food->select();
             },
             function(data,status){
                 if(data.code == 200) {
-
                     $("#num"+id+"").val(data.sum);
                     $("#total_price").html(data.sumPrice);
 
@@ -156,7 +155,8 @@ $arr_food = $mod_food->select();
 
                 }
                 else {
-                    layer.msg(data.msg)
+                    layer.msg(data.msg);
+                    window.location.href = "/login.php";
                 }
             },"JSON");
     }

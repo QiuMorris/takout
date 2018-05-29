@@ -75,8 +75,8 @@ $arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->
                                 <a class="fr" onclick="delete_add(<?php echo $valaddress['id'] ?>)">
                                     <img src="img/delete.png" width="23">删除
                                 </a>
-                                <a href="change_address.php" class="fr">
-                                    <img src="img/write.png" width="21" href="change_address.php">编辑
+                                <a href="change_address.php?id=<?php echo $valaddress['id'] ?>" class="fr">
+                                    <img src="img/write.png" width="21">编辑
                                 </a>
                             </div>
                         </div>
@@ -131,7 +131,6 @@ $arr_address=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id']))->
                     }
                 },"JSON");
         });
-
 
     });
 </script>

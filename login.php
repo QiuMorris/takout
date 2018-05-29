@@ -94,7 +94,7 @@
 <body id="account-login" class="waimai" data-com="pagecommon" data-page-id="100040" data-iswebview='false'>
 <header class="navbar">
     <div class="nav-wrap-left">
-        <a class="react back" href="javascript:history.back()"><img class="return-icon" src="images/return_icon.png"></a>
+        <a class="react back" href="index.php"><img src="/img/back.png" width="20"></a>
     </div>
     <h1 class="nav-header">
         登录

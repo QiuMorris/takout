@@ -20,12 +20,22 @@ if(!$_SESSION['user'])
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/others.js"></script>
+    <script type="text/javascript" src="js/hmt.js" ></script>
+    <script src="slick/slick.js" type="text/javascript" ></script>
+    <!--插件-->
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <script src="js/swiper.jquery.min.js"></script>
+
+    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
+    <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
 </head>
 <body>
 <!--header star-->
@@ -79,14 +89,20 @@ if(!$_SESSION['user'])
                         </a>
                     </li>
                     <li class="box-s">
-                        <a href="setup.php">
-                            <p class="fl">我要开店</p>
+                        <a href="store_in.php">
+                            <p class="fl">商家入驻</p>
+                            <img src="/img/next.png" width="20" style="margin-left: 250px">
+                        </a>
+                    </li>
+                    <li class="box-s">
+                        <a href="saler_homepage.php">
+                            <p class="fl">商家主页</p>
                             <img src="/img/next.png" width="20" style="margin-left: 250px">
                         </a>
                     </li>
                 </ul>
             </div>
-            <a href="#" class="center-btn db ra3">退出登录</a>
+            <a class="center-btn db ra3" id="login_out">退出登录</a>
         </div>
     </div>
 </div>
@@ -112,12 +128,25 @@ if(!$_SESSION['user'])
     </div>
 </footer>
 </body>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script src="js/mui.min.js"></script>
-<script src="js/others.js"></script>
-<script type="text/javascript" src="js/hmt.js" ></script>
-<script src="slick/slick.js" type="text/javascript" ></script>
-<!--插件-->
-<link rel="stylesheet" href="css/swiper.min.css">
-<script src="js/swiper.jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+        $("#login_out").bind("click",function(){
+            // alert(this);
+            $.post("ajax_user.php?act=login_out",
+                {
+                },
+                function(data){
+                    if(data.code == 200) {
+                        window.location.href = "/login.php";
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                },"JSON");
+        });
+    });
+</script>
+
 </html>

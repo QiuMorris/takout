@@ -18,10 +18,13 @@ include_once 'comm/dbconfig.php';
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+    <script src="js/jquery.SuperSlide.2.1.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        jQuery(".notice").slide({ titCell:".tab-hd li", mainCell:".tab-bd",delayTime:0 });
+    </script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
@@ -302,12 +305,6 @@ include_once 'comm/dbconfig.php';
         </a>
     </div>
     <div>
-        <a href="rush.php">
-            <div class="icon i-2"><img src="img/recomnd.png" width="25"></div>
-            <p>推荐</p>
-        </a>
-    </div>
-    <div>
         <a href="order.php">
             <div class="icon i-3"><img src="img/order.png" width="22"></div>
             <p>订单</p>
@@ -322,9 +319,6 @@ include_once 'comm/dbconfig.php';
 </footer>
 
 </body>
-<script src="js/jquery.SuperSlide.2.1.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    jQuery(".notice").slide({ titCell:".tab-hd li", mainCell:".tab-bd",delayTime:0 });
-</script>
+
 </html>
 

@@ -2,6 +2,12 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+
+$mod_sell_photo = new MysqliModel('seller');
+$sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
+//var_dump($sel_exephoto);
+//exit;
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +26,6 @@ include_once 'comm/dbconfig.php';
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
@@ -28,15 +33,27 @@ include_once 'comm/dbconfig.php';
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
     <script src="layui/layui.js"></script>
+    <style>
+        .to{width:80px;height:80px;border-radius:100px}
+    </style>
+
     <script>
         layui.use('upload', function(){
             var upload = layui.upload;
 
             var uploadInst = upload.render({
-                elem: '#test1' //绑定元素
-                ,url: '' //上传接口
-                ,done: function(res){
+                elem: '#upStoreuser' //绑定元素
+                ,url: '/ajax_seller.php?act=upStoreuser' //上传接口
+                ,done: function(data){
                     //上传完毕回调
+                    if(data.code == 200) {
+                        layer.msg(data.msg);
+                    //    console.log(data.msg);
+                        location.reload();
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
                 }
                 ,error: function(){
                     //请求异常回调
@@ -44,24 +61,28 @@ include_once 'comm/dbconfig.php';
             });
 
             var uploadInst1 = upload.render({
-                elem: '#test2' //绑定元素
-                ,url: '/upload/' //上传接口
-                ,done: function(res){
-                    //上传完毕回调
+                elem: '#upStore1' //绑定元素
+                ,url: '/ajax_seller.php?act=upStore1' //上传接口
+                ,done: function(data){
+                    layer.msg(data.msg);
+
+                    location.reload();
                 }
-                ,error: function(){
-                    //请求异常回调
+                ,error: function(data){
+                    layer.msg(data.msg);
                 }
             });
 
             var uploadInst3 = upload.render({
-                elem: '#test3' //绑定元素
-                ,url: '/upload/' //上传接口
-                ,done: function(res){
-                    //上传完毕回调
+                elem: '#upStore2' //绑定元素
+                ,url: '/ajax_seller.php?act=upStore2' //上传接口
+                ,done: function(data){
+                    layer.msg(data.msg);
+                    location.reload();
                 }
-                ,error: function(){
-                    //请求异常回调
+                ,error: function(data){
+                    layer.msg(data.msg);
+
                 }
             });
         });
@@ -79,56 +100,101 @@ include_once 'comm/dbconfig.php';
     <div id="main">
         <div class="warp warpthree clearfloat">
             <div class="h-top h-toptwo clearfloat box-s">
-                <p class="tu"><img src="img/touxiang.png" id="test3"/></p>
-                <p class="nr">王小王</p>
+                <p class="tu"><img class="to" src="<?php echo $sel_exephoto['sel_logo']?>" id="upStoreuser"/></p>
+                <p class="nr">选择头像</p>
             </div>
             <div class="apply clearfloat">
                 <div class="top clearfloat">
                     <ul>
-                        <li class="fl ra3" id="test1">
+                        <?php if($sel_exephoto['sel_license']){ ?>
+                            <img  id="upStore1" src="<?php echo $sel_exephoto[sel_license] ?>" width="162" height="122" />';
+                        <?php }else{?>
+                        <li class="fl ra3" id="upStore1">
                             <img src="img/jia.png"  width="30">
                             <p>添加营业执照</p>
                         </li>
-                        <li class="fr ra3" id="test2">
+                        <?php }?>
+                        <?php if($sel_exephoto['sel_photo']){ ?>
+                            <img id="upStore2" src="<?php echo $sel_exephoto[sel_photo] ?>" width="162" height="122" />';
+                        <?php }else{?>
+
+                        <li class="fr ra3" id="upStore2">
                             <img src="img/jia.png" width="30">
                             <p>添加法人身份证</p>
                         </li>
+                        <?php }?>
                     </ul>
                 </div>
+
                 <div class="bottom clearfloat">
                     <ul>
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家名称：</p>
-                                <input type="text" id="" value="" placeholder="" />
+                                <input type="text" id="sel_name" value="" placeholder="" />
                             </div>
                         </li>
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家地址：</p>
-                                <input type="text" id="" value="" placeholder="" />
+                                <input type="text" id="sel_address" value="" placeholder="" />
                             </div>
                         </li>
                         <li>
                             <div class="box-s clearfloat">
                                 <p>联系电话：</p>
-                                <input type="text" id="" value="" placeholder="" />
+                                <input type="text" id="sel_tel" value="" placeholder="" />
                             </div>
                         </li>
 
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家描述：</p>
-                                <input type="text" id="" value="" placeholder="" />
+                                <input type="text" id="sel_info" value="" placeholder="" />
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <a href="#" class="center-btn db ra3">提交</a>
+                <a class="center-btn db ra3" id="s_updateStore">提交</a>
             </div>
         </div>
     </div>
 </div>
 </body>
+
+<script>
+    $(document).ready(function(){
+        $("#s_updateStore").click(function(){
+            var s_name=$("#sel_name").val();
+            var s_address=$("#sel_address").val();
+            var s_tel=$("#sel_tel").val();
+            var s_info=$("#sel_info").val();
+            // alert(mob.length);
+
+            if(s_name.length < 1 || s_address.length <1 || s_tel.length <1 || s_info.length <1) {
+                layer.msg('对不起，您的店铺信息输入不完全！');
+                return ;
+            }
+
+
+            $.post("ajax_seller.php?act=updateStore",
+                {
+                    sel_name:s_name,
+                    sel_address:s_address,
+                    sel_tel:s_tel,
+                    sel_info:s_info
+                },
+                function(data,status){
+                    if(data.code == 200) {
+                        layer.msg('注册成功!');
+                        window.location.href = "/saler_homepage.php";
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                },"JSON");
+        });
+    });
+</script>
 </html>

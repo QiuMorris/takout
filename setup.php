@@ -29,7 +29,7 @@ include_once 'comm/dbconfig.php';
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a class="fl fanhui"><img src="img/back.png" width="20" href="center.php"></a>
+    <a href="center.php" class="fl fanhui"><img src="img/back.png" width="20" ></a>
     <div class="header-tit">
         管理中心
     </div>

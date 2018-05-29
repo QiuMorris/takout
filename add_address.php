@@ -97,7 +97,6 @@ include_once 'comm/dbconfig.php';
                 return ;
             }
 
-
             if(!(/^1[3|4|5|8|7][0-9]\d{4,8}$/.test(tel))){
                 layer.msg("不正确的手机号");
                 return;
@@ -108,7 +107,6 @@ include_once 'comm/dbconfig.php';
                 layer.msg("地址不完整");
                 return;
             }
-
 
             $.post("ajax_user.php?act=add_address",
                 {

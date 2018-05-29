@@ -7,6 +7,29 @@ include_once 'comm/dbconfig.php';
 $mod_address = new MysqliModel('address');//实例化
 $readdress=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id'], 'is_default'=>1))->selectOne();
 
+$_SESSION['address'] = $readdress;
+
+foreach ($_SESSION['cartlist'] as $key=>$value) {
+    $_SESSION['cartlist'][$key]['sel_name']=getSel($value['sel_id'],'sel_name');
+}
+$sumPrice=0;
+foreach ($_SESSION['cartlist'] as $key=>$value) {
+    $sumPrice+=$value['food_price']*$value['num'];
+}
+if($sumPrice>0)
+{
+    $sumPrice+=5;
+    $_SESSION['cart'] = $sumPrice;
+}
+
+
+function getSel($sel_id,$sel_name)
+{
+    $mod_seller = new MysqliModel('seller');
+    $re=$mod_seller->where(array('sel_id'=>$sel_id))->selectOne();
+    return $re[$sel_name];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -62,58 +85,73 @@ $readdress=$mod_address->where(array('cus_id'=>$_SESSION['user']['cus_id'], 'is_
                 </dd>
             </dl>
 
+
             <dl class="list">
+                <?php foreach ($_SESSION['cartlist'] as $key=>$value):?>
                 <dd>
                     <dl>
                         <dd class="dd-padding kv-line-r">
-                            <h6>正新鸡排大洋百货店</h6>
+                            <h6><?php echo $value['sel_name']?></h6>
                         </dd>
                         <dd class="dd-padding kv-line-r">
-                            <h6>重庆小面</h6>
-                            <p>8.8元</p>
-                        </dd>
-                        <dd class="dd-padding dd-paddingtwo kv-line-r quantity">
-                            <h6>重庆小面</h6>
-                            <p>8.8元</p>
-                        </dd>
-                        <dd class="dd-padding kv-line-r">
-                            <h6>重庆小面</h6>
-                            <p>8.8元</p>
+                            <h6><?php echo $value['food_name']?></h6>
+                            <p><?php echo $value['food_price']?> x </p>
+                            <p><?php echo $value['num']?></p>
                         </dd>
                     </dl>
                 </dd>
+                <?php  endforeach;?>
+
             </dl>
 
             <dl class="list">
                 <dd class="kv-line-r dd-padding">
                     <h6>订单总价：</h6>
                     <p>
-                        <span id="realPayMoney" class="J_total-price">8.8</span>
+                        <span id="realPayMoney" class="J_total-price"><?php echo $sumPrice;?></span>
                         <span class="price-unit">元</span>
-                    </p>
+                    </>
                 </dd>
             </dl>
 
-            <h4>配送信息</h4>
-            <dl class="list" id="mobile-show">
-                <dd>
-                    <a class="react" href="#">
-                        <div class="more moretwo more-weak">
-                            130****9860
+<!--            <h4>配送信息</h4>-->
+<!--            <dl class="list" id="mobile-show">-->
+<!--                <dd>-->
+<!--                    <a class="react" href="#">-->
+<!--                        <div class="more moretwo more-weak">-->
+<!--                            130****9860-->
 <!--                            <span class="more-after">新号码</span>-->
-                        </div>
-                    </a>
-                </dd>
-            </dl>
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </dd>-->
+<!--            </dl>-->
             <div class="btn-wrapper">
                 <a href="pay.php" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >提交订单</a>
             </div>
             <div class="btn-wrapper">
-                <a href="pay.php" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >取消订单</a>
+                <a id="out_order" type="submit" class="btn btn-block btn-strong btn-larger mj-submit" >取消订单</a>
             </div>
         </form>
     </div>
 </div>
 </body>
-</html>
 
+<script>
+    $(document).ready(function(){
+        $("#out_order").bind("click",function(){
+            // alert(this);
+            $.post("ajax_user.php?act=out_order",
+                {
+                },
+                function(data){
+                    if(data.code == 200) {
+                        window.location.href = "/tuan.php";
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                },"JSON");
+        });
+    });
+</script>
+</html>
