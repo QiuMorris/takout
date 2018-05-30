@@ -64,6 +64,7 @@ include_once 'comm/dbconfig.php';
                 </div>
             </div>
         </div>
+        
         <div class="btn-line">
             <button class="btn btn-submit">
                 <span class="in-confirm" id="con_pay">确认支付</span>

@@ -19,7 +19,6 @@ include_once 'comm/dbconfig.php';
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
 </head>
 <body>

@@ -3,8 +3,15 @@ session_start();
 include_once 'comm/dbconfig.php';
 include_once 'comm/MysqliModel.class.php';
 
+/*
+ * 0--客户
+ * 1--商家
+ * 2--骑手
+ * */
+
 $mod_order = new MysqliModel('myorder');
 $mod_detail_list = new MysqliModel('detail_list');
+$mod_payinfo = new MysqliModel('payinfo');
 
 
 if($_GET['act'] == 'con_pay') {
@@ -24,6 +31,7 @@ if($_GET['act'] == 'con_pay') {
     $data['is_pay']=1;
     $data['del_time']=time() + 3600;
     $data['sel_id']=$_SESSION['cartlist'][0]['sel_id'];
+    $data['salary']=$_SESSION['cart'];
 
     $re=$mod_order->insert($data);
 
@@ -36,11 +44,38 @@ if($_GET['act'] == 'con_pay') {
             $updata['food_num']=$v['num'];
             $updata['food_name']=$v['food_name'];
             $updata['food_price']=$v['food_price'];
-            $updata['order_id']=$data['order_time'];
+            $updata['order_id']=$data['order_number'];
             $updata['order_note']="请尽快送达";
             $mod_detail_list->insert($updata);
         }
     }
+
+    // write liushui
+    $payinfo['user_type']=0;
+    $payinfo['user_id']=$_SESSION['user']['cus_id'];
+    $payinfo['order_id']=$data['order_number'];
+    $payinfo['order_date']=time();
+    $payinfo['order_info']="订单支出";
+    $payinfo['order_value']="-".$_SESSION['cart'];
+    $re=$mod_payinfo->insert($payinfo);
+
+
+    $pay_sel['user_type']=1;
+    $pay_sel['user_id']=$_SESSION['cartlist'][0]['sel_id'];
+    $pay_sel['order_id']=$data['order_number'];
+    $pay_sel['order_date']=time();
+    $pay_sel['order_info']="订单收入";
+    $pay_sel['order_value']="+".($_SESSION['cart']*0.8);
+    $re=$mod_payinfo->insert($pay_sel);
+
+//    unset($pay_sel);
+    $deli_sel['user_type']=2;
+    $deli_sel['user_id']=1;
+    $deli_sel['order_id']=$data['order_number'];
+    $deli_sel['order_date']=time();
+    $deli_sel['order_info']="配送收入";
+    $deli_sel['order_value']="+".($_SESSION['cart']*0.2);
+    $re=$mod_payinfo->insert($deli_sel);
 
     unset($_SESSION['cartlist']);
     unset($_SESSION['cart']);

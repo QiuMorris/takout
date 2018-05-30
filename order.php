@@ -2,6 +2,39 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+$mod_myorder = new MysqliModel('myorder');
+$mod_detail_list = new MysqliModel('detail_list');
+$mod_seller = new MysqliModel('seller');
+$reSel=$mod_seller->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
+$_SESSION['user']['sel_id']=$reSel['sel_id'];
+
+$order_type=1;
+if($_GET['order_type']>1)
+{
+    $order_type=$_GET['order_type'];
+}
+
+$arr_order = $mod_myorder->where(array('sel_id'=>$reSel['sel_id'], 'order_type'=>$order_type))->select();
+
+foreach ($arr_order as $key=>$value){
+    $arr_order[$key]['foodlist']=getfood($value['order_number']);
+    $arr_order[$key]['arr_seller'] = getStore($value['sel_id']);
+}
+
+function getfood($order_number)
+{
+    global $mod_detail_list;
+    return $mod_detail_list->where(array('order_id'=>$order_number))->select();
+}
+
+function getStore($seller_id)
+{
+    global $mod_seller;
+    return $mod_seller->where(array('sel_id'=>$seller_id))->selectOne();
+}
+//print_r($arr_order);
+//exit;
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -28,8 +61,11 @@ include_once 'comm/dbconfig.php';
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+
 </head>
-<body>
+<body >
 <header class="hasManyCity hasManyCitytwo" id="header">
     <a href="javascript:history.go(-1)" class="fl fanhui"><img src="img/back.png" width="20" href="center.php"></a>
     <div class="header-tit">
@@ -40,259 +76,336 @@ include_once 'comm/dbconfig.php';
 <div id="container">
     <div id="main">
         <div class="notice">
-            <div class="tab-hd tab-hdtwo">
+            <div class="tab-hd ">
                 <ul class="tab-nav">
-                    <li>全部</li>
-                    <li>待付款</li>
-                    <li>待评价</li>
-                    <li>退款/售后</li>
+                    <li class="Newband"><a href="order.php" >已接单</a></li>
+                    <li class="Waiting"><a href="order.php?order_type=2" >配送中</a></li>
+                    <li class="Delivering"><a href="order.php?order_type=3" >已完成</a></li>
+<!--                    <li>已接单</li>-->
+<!--                    <li>配送中</li>-->
+<!--                    <li>已完成</li>-->
                 </ul>
             </div>
-            <div class="tab-bd">
-                <div class="tab-pal">
-                    <dl class="list listtwo list-in">
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">未付款</p>
-                                <a href="pay.php" class="fr">付款</a>
-                            </div>
-                        </dd>
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </dd>
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">已取消</p>
-                                <a href="tuan-detail.html" class="fr">再次购买</a>
-                            </div>
-                        </dd>
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">已完成</p>
-                                <a href="tuan-detail.html" class="fr">再次购买</a>
-                                <a href="assess.php" class="fr">评价</a>
-                            </div>
-                        </dd>
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">已退款</p>
-                                <a href="tuikuan.html" class="fr">查看钱款</a>
-                            </div>
-                        </dd>
 
-                    </dl>
-                </div>
-                <div class="tab-pal">
-                    <dl class="list listtwo list-in">
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">未付款</p>
-                                <a href="torder.html" class="fr">付款</a>
-                            </div>
-                        </dd>
 
-                    </dl>
+                <div id="main">
+                    <section >
+                        <dl class="dealcard">
+
+                            <?php foreach ($arr_order as $key=>$valueOrder):?>
+                                <dd class="page-link" style="margin: 5px 5px 5px 5px; ">
+
+                                    <div class="dealcard-message box">
+                                        订单号：<?php echo $valueOrder['order_number']?>
+
+                                        <?php if($order_type==1){?>
+                                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 催单 </button>
+                                        <?php }elseif($order_type==2){?>
+                                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 配送中 </button>
+                                        <?php }elseif($order_type==3){?>
+                                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 已送达 </button>
+                                        <?php }?>
+
+                                    </div>
+                                    <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+
+                                    <div class="dealcard-block" >
+                                        <div class="message" style="margin-top: 5px;">
+                                            商户名称：<em style="margin-left: 10px;"><?php echo $valueOrder['arr_seller']['sel_name']?></em>
+                                        </div>
+                                        <div style="clear: both;"></div>
+
+                                        <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+
+                                        <div class="message" style="margin-top: 15px;">
+                                            <p style="float: left; width: 100%;">
+                                                <img src="img/timer.png" width="15">
+                                                <em style="margin-left: 10px;"><span>预计:<?php echo date("Y-m-d H:i", $valueOrder['del_time']);?>  前送餐</span></em>
+                                            </p>
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                        <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+
+                                        <div class="dealcard-block" >
+                                            <?php foreach ($valueOrder['foodlist'] as $k=>$val): ?>
+                                                <div class="message" style="margin-top: 15px;">
+                                                    <p style="float: left; width: 60%;"><span > <?php echo $val['food_name']?></span><span style="display: block; float: right;"> 数量：<?php echo $val['food_num']?></span></p><p style="float: right;"><?php echo $val['food_price']?>元</p>
+                                                </div>
+                                                <div style="clear: both;"></div>
+                                                <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+                                            <?php endforeach; ?>
+
+                                            <div class="message" style="margin-top: 15px;">
+                                                <p style="float: left; width: 60%;"><span style="display: block; "> 配送费：5RMB</span></p><p style="float: right;">合计：<?php echo $valueOrder['salary']?></p>
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                            <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+
+
+                                        <div class="message" style="margin-top: 15px;">
+                                            <p style="float: left; width: 100%;">商户联系电话：<?php echo $valueOrder['arr_seller']['sel_tel']?></p>
+                                        </div>
+                                        <div style="clear: both;"></div>
+
+
+                                </dd>
+                            <?php endforeach; ?>
+
+                        </dl>
+                    </section>
+                    <div style="clear: both;"></div>
                 </div>
 
-                <div class="tab-pal">
-                    <dl class="list listtwo list-in">
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">已完成</p>
-                                <a href="tuan-detail.html" class="fr">再次购买</a>
-                                <a href="assess.php" class="fr">评价</a>
-                            </div>
-                        </dd>
 
-                    </dl>
-                </div>
-                <div class="tab-pal">
-                    <dl class="list listtwo list-in">
-                        <dd>
-                            <div class="orderbh clearfloat box-s">
-                                订单编号20164546151515
-                            </div>
-                            <a href="#" class="react">
-                                <div class="dealcard dealcardtwo clearfloat">
-                                    <div class="dealcard-img imgbox">
-                                        <img src="img/54b9cae9d6bc4.jpg">
-                                    </div>
-                                    <div class="dealcard-block-right dealcard-block-righttwo">
-                                        <div class="dealcard-brand dealcard-brandtwo single-line">
-                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">数量：120</span>
-                                        </div>
-                                        <div class="price pricetwo">
-                                            <span class="address">总价：</span>
-                                            <span class="strong">¥125</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="order-bottom clearfloat box-s">
-                                <p class="fl">已退款</p>
-                                <a href="tuikuan.html" class="fr">查看钱款</a>
-                            </div>
-                        </dd>
 
-                    </dl>
-                </div>
-            </div>
+
+<!--            <div class="tab-bd">-->
+<!--                <div class="tab-pal">-->
+<!--                    <dl class="list listtwo list-in">-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">未付款</p>-->
+<!--                                <a href="pay.php" class="fr">付款</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </dd>-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">已取消</p>-->
+<!--                                <a href="tuan-detail.html" class="fr">再次购买</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">已完成</p>-->
+<!--                                <a href="tuan-detail.html" class="fr">再次购买</a>-->
+<!--                                <a href="assess.php" class="fr">评价</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">已退款</p>-->
+<!--                                <a href="tuikuan.html" class="fr">查看钱款</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!---->
+<!--                    </dl>-->
+<!--                </div>-->
+<!--                <div class="tab-pal">-->
+<!--                    <dl class="list listtwo list-in">-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">未付款</p>-->
+<!--                                <a href="torder.html" class="fr">付款</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!---->
+<!--                    </dl>-->
+<!--                </div>-->
+<!---->
+<!--                <div class="tab-pal">-->
+<!--                    <dl class="list listtwo list-in">-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">已完成</p>-->
+<!--                                <a href="tuan-detail.html" class="fr">再次购买</a>-->
+<!--                                <a href="assess.php" class="fr">评价</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!---->
+<!--                    </dl>-->
+<!--                </div>-->
+<!--                <div class="tab-pal">-->
+<!--                    <dl class="list listtwo list-in">-->
+<!--                        <dd>-->
+<!--                            <div class="orderbh clearfloat box-s">-->
+<!--                                订单编号20164546151515-->
+<!--                            </div>-->
+<!--                            <a href="#" class="react">-->
+<!--                                <div class="dealcard dealcardtwo clearfloat">-->
+<!--                                    <div class="dealcard-img imgbox">-->
+<!--                                        <img src="img/54b9cae9d6bc4.jpg">-->
+<!--                                    </div>-->
+<!--                                    <div class="dealcard-block-right dealcard-block-righttwo">-->
+<!--                                        <div class="dealcard-brand dealcard-brandtwo single-line">-->
+<!--                                            <span class="poi-name icon-count-3">这里是商品名称这里是商品名称</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">数量：120</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="price pricetwo">-->
+<!--                                            <span class="address">总价：</span>-->
+<!--                                            <span class="strong">¥125</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <div class="order-bottom clearfloat box-s">-->
+<!--                                <p class="fl">已退款</p>-->
+<!--                                <a href="tuikuan.html" class="fr">查看钱款</a>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!---->
+<!--                    </dl>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
         </div>
     </div>
 </div>
@@ -319,6 +432,8 @@ include_once 'comm/dbconfig.php';
 </footer>
 
 </body>
+
+
 
 </html>
 

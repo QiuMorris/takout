@@ -90,40 +90,7 @@ include_once 'comm/dbconfig.php';
     </div>
 </div>
 
-<!--footer star-->
-<footer id="footer">
-    <div>
-        <a href="index.html">
-            <div class="icon i-1"></div>
-            <p>首页</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <div class="icon i-5"></div>
-            <p>附近</p>
-        </a>
-    </div>
-    <div>
-        <a href="rush.html">
-            <div class="icon i-2"></div>
-            <p>抢购</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <div class="icon i-3"></div>
-            <p>关注</p>
-        </a>
-    </div>
-    <div>
-        <a href="center.html">
-            <div class="icon i-4 on"></div>
-            <p>我的</p>
-        </a>
-    </div>
-</footer>
-<!--footer end-->
+
 </body>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script src="js/mui.min.js"></script>

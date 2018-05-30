@@ -2,6 +2,12 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+$mod_food = new MysqliModel('food');
+$sel_foodlist = $mod_food->where(array('sel_id'=>$_SESSION['user']['sel_id']))->select();
+
+//var_dump($sel_foodlist);
+//exit;
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +29,9 @@ include_once 'comm/dbconfig.php';
     <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script src="layui/lay/modules/layer.js"></script>
+    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
+    <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
+
     <script>
         function showmsg() {
             layer.open({
@@ -48,14 +57,12 @@ include_once 'comm/dbconfig.php';
 
 <div id="container">
     <div id="main">
-        <!--店铺头部开始-->
         <div class="store-header clearfix">
             <div class="tu">
-<!--                <span></span>-->
                 <img src="img/tou.png"/>
             </div>
             <div class="right fl">
-                <p>麦当劳（龙头寺公园店）</p>
+                <p></p>
                 <p class="htel">欢迎回来：18324138828</p>
             </div>
             <div class="tit">
@@ -77,47 +84,40 @@ include_once 'comm/dbconfig.php';
                     <li class="active" rel="all">
                         <a href="javascript:void(0);">全部分类</a>
                     </li>
-                    <li rel="cate_1">
-                        <a href="javascript:void(0);">饭食类</a>
-                    </li>
-                    <li rel="cate_2">
-                        <a href="javascript:void(0);">自助餐</a>
-                    </li>
+<!--                    <li rel="cate_1">-->
+<!--                        <a href="javascript:void(0);">饭食类</a>-->
+<!--                    </li>-->
+<!--                    <li rel="cate_2">-->
+<!--                        <a href="javascript:void(0);">自助餐</a>-->
+<!--                    </li>-->
                 </ul>
             </div>
             <div class="frame-set-right">
                 <div class="list-have-pic list-have-pictwo">
                     <div class="eleList_box">
-                        <div class="list-box cate_2">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">鱼香肉丝</p>
-                                <p class="price fontcl1">11.5元</p>
-                                <br/>
-                                <div class="num-input">
-<!--                                    <input type="button" onclick="window.location.href('thing_setup.php')">-->
-                                    <button><a href="thing_setup.php">编辑</a></button>
-                                    <button value="下架" onclick="showmsg()">下架</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-box cate_2">
-                            <div class="list-img">
-                                <img src="img/54b9cae9d6bc4.jpg">
-                            </div>
-                            <div class="list-content">
-                                <p class="overflow_clear">鱼香肉丝</p>
-                                <p class="price fontcl1">11.5元</p>
-                                <br/>
-                                <div class="num-input">
-                                    <button><a href="thing_setup.php">编辑</a></button>
-                                    <button value="下架" onclick="showmsg()">下架</button>
-                                </div>
-                            </div>
-                        </div>
 
+                        <?php foreach ($sel_foodlist as $key=>$valuefoodList):?>
+                            <div class="list-box cate_2">
+                                <div class="list-img">
+                                    <img src="<?php echo $valuefoodList['food_jpg']?>">
+                                </div>
+                                <div class="list-content">
+                                    <p class="overflow_clear"><?php echo $valuefoodList['food_name']?></p>
+                                    <p class="price fontcl1"><?php echo $valuefoodList['food_price']?></p>
+                                    <br/>
+                                    <div class="num-input">
+    <!--                                    <input type="button" onclick="window.location.href('thing_setup.php')">-->
+                                        <button><a href="thing_setup.php?food_id=<?php echo $valuefoodList['food_id']?>">编辑</a></button>
+
+                                            <?php if ($valuefoodList['food_state'] == 0) {?>
+                                                <button><a onclick="up_foodState(<?php echo $valuefoodList['food_id']?>)">已下架</a></button>
+                                            <?php } else { ?>
+                                                <button><a onclick="change_foodState(<?php echo $valuefoodList['food_id']?>)">下架</a></button>
+                                            <?php }?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
 
                     </div>
                 </div>
@@ -125,6 +125,48 @@ include_once 'comm/dbconfig.php';
         </div>
     </div>
 </div>
+
+<script>
+    function change_foodState(food_id)
+    {
+        $.post("ajax_seller.php?act=change_foodState",
+            {
+                food_id:food_id
+            },
+            function(data){
+                if(data.code == 200) {
+                    layer.msg('菜品下架成功!');
+                    // window.location.href = "/saler_thingManage.php";
+                    location.reload();
+                }
+                else {
+                    layer.msg(data.msg);
+                }
+            },"JSON");
+    }
+
+    function up_foodState(food_id)
+    {
+        $.post("ajax_seller.php?act=up_foodState",
+            {
+                food_id:food_id
+            },
+            function(data){
+                if(data.code == 200) {
+                    layer.msg('菜品上架成功!');
+                    // window.location.href = "/saler_thingManage.php";
+                    location.reload();
+                }
+                else {
+                    layer.msg(data.msg);
+                }
+            },"JSON");
+    }
+
+
+</script>
+
 </body>
+
 </html>
 

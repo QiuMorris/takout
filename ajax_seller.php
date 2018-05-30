@@ -6,6 +6,7 @@ include_once 'comm/MysqliModel.class.php';
 
 $mod_customer = new MysqliModel('customer');
 $mod_seller = new MysqliModel('seller');
+$mod_food = new MysqliModel('food');
 
 if($_GET['act'] == 'upStoreuser') {
 
@@ -24,7 +25,6 @@ if($_GET['act'] == 'upStoreuser') {
     }
 
     $cupath="/upload/".time().$e_name; //存数据库
-
 
     $data['sel_logo']=$cupath;
     $re=$mod_seller->updateBy($data,'cus_id', $_SESSION['user']['cus_id']);
@@ -172,7 +172,71 @@ else if($_GET['act'] == 'updateStore') {
         }
     }
 
+    echo json_encode($jsonArr);
+    exit;
+}
 
+else if($_GET['act'] == 'save_food')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['food_name'] = $_POST['food_name'];
+    $data['food_price'] = $_POST['food_price'];
+    $data['food_num'] = $_POST['food_num'];
+    $data['food_note'] = $_POST['food_note'];
+
+
+    $refood = $mod_food->updateBy($data,'food_id',$_POST['food_id']);
+    if ($refood) {
+        $jsonArr["msg"] = "更新成功";
+        $jsonArr["code"] = 200;
+    }
+    else {
+        $jsonArr["msg"] = "更新失败";
+        $jsonArr["code"] = 400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'change_foodState')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['food_state'] = 0;
+    $refood = $mod_food->updateBy($data,'food_id',$_POST['food_id']);
+    if ($refood) {
+        $jsonArr["msg"] = "下架成功";
+        $jsonArr["code"] = 200;
+    }
+    else {
+        $jsonArr["msg"] = "更新失败";
+        $jsonArr["code"] = 400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'up_foodState')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['food_state'] = 1;
+    $refood = $mod_food->updateBy($data,'food_id',$_POST['food_id']);
+    if ($refood) {
+        $jsonArr["msg"] = "上架成功";
+        $jsonArr["code"] = 200;
+    }
+    else {
+        $jsonArr["msg"] = "更新失败";
+        $jsonArr["code"] = 400;
+    }
 
     echo json_encode($jsonArr);
     exit;

@@ -6,7 +6,7 @@ include_once 'comm/MysqliModel.class.php';
 
 
 $mod_food = new MysqliModel('food');
-$arr_food = $mod_food->where(array('sel_id'=>$_GET['id']))->select();
+$arr_food = $mod_food->where(array('sel_id'=>$_GET['id'], 'food_state'=>1))->select();
 ?>
 
 <!DOCTYPE html>

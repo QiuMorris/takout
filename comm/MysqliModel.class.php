@@ -248,7 +248,6 @@ class MysqliModel {
      * 获取当前操作表的所有字段
      */
     public function getFields() {
-
         $sql = "desc {$this->tableName}";
         $result = mysqli_query($this->link, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
