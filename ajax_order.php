@@ -12,6 +12,7 @@ include_once 'comm/MysqliModel.class.php';
 $mod_order = new MysqliModel('myorder');
 $mod_detail_list = new MysqliModel('detail_list');
 $mod_payinfo = new MysqliModel('payinfo');
+$mod_assess = new MysqliModel('assess');
 
 
 if($_GET['act'] == 'con_pay') {
@@ -20,7 +21,8 @@ if($_GET['act'] == 'con_pay') {
     $jsonArr["msg"]="成功";
     $jsonArr["code"]=200;
     $data=array();
-//    $data['cus_id']=$_SESSION['user']['cus_id'];
+
+    $data['cus_id']=$_SESSION['user']['cus_id'];
     $data['order_number']="No123".time();
     $data['order_type']=0;
     $data['order_time']=time();
@@ -32,6 +34,7 @@ if($_GET['act'] == 'con_pay') {
     $data['del_time']=time() + 3600;
     $data['sel_id']=$_SESSION['cartlist'][0]['sel_id'];
     $data['salary']=$_SESSION['cart'];
+    $data['is_assess']=0;//默认为未评价
 
     $re=$mod_order->insert($data);
 
@@ -82,6 +85,33 @@ if($_GET['act'] == 'con_pay') {
     unset($_SESSION['address']);
     $jsonArr["msg"]="成功";
     $jsonArr["code"]=200;
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'updateAssess')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['assess_info'] = $_POST['assess_info'];
+    $data['assess_type'] = $_POST['assess_type'];
+    $data['sel_id'] = $_POST['sel_id'];
+    $data['assess_time'] = time();
+    $data['cus_id'] = $_SESSION['user']['cus_id'];
+
+    $re = $mod_assess->insert($data);
+
+//    $orderdata['order_number'] = $_POST['order_number'];
+    $orderdata['is_assess'] = 1;
+
+    $recus = $mod_order->updateBy($orderdata,'order_id',$_POST['order_id']);
+
+    if ($recus) {
+        $jsonArr["msg"] = "评价成功";
+        $jsonArr["code"] = 200;
+    }
+
     echo json_encode($jsonArr);
     exit;
 }

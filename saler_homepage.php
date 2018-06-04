@@ -2,6 +2,12 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+if(!$_SESSION['user'])
+{
+    header('Location: /saler_homepage.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,17 +25,25 @@ include_once 'comm/dbconfig.php';
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/others.js"></script>
+    <script type="text/javascript" src="js/hmt.js" ></script>
+    <script src="slick/slick.js" type="text/javascript" ></script>
+    <!--插件-->
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <script src="js/swiper.jquery.min.js"></script>
 </head>
 <body>
 <!--header star-->
 <header class="hasManyCity hasManyCitytwo" id="header">
-<!--    <a href="setup.html" class="fr shoucang sousuo"><img src="img/customer.png" width="20"></a>-->
+    <a href="javascript:history.go(-1)" class="fl fanhui"><img src="img/backw.png" width="20"></a>
     <div class="header-tit">
         我的店铺
     </div>
@@ -69,7 +83,7 @@ include_once 'comm/dbconfig.php';
                             </a>
                         </li>
                         <li>
-                            <a href="assess.php">
+                            <a href="lookassess.php">
                                 <img src="img/pingjia.png" width="30" height="30"/>
                                 <span>用户评价</span>
                             </a>
@@ -92,13 +106,6 @@ include_once 'comm/dbconfig.php';
 
 
 </body>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script src="js/mui.min.js"></script>
-<script src="js/others.js"></script>
-<script type="text/javascript" src="js/hmt.js" ></script>
-<script src="slick/slick.js" type="text/javascript" ></script>
-<!--插件-->
-<link rel="stylesheet" href="css/swiper.min.css">
-<script src="js/swiper.jquery.min.js"></script>
+
 </html>
 

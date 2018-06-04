@@ -70,6 +70,7 @@ include_once 'comm/dbconfig.php';
                 </ul>
             </div>
             <dl class="dealcard">
+
                 <dd class="page-link">
                     <a href="#">
                         <div class="dealcard-img imgbox"> <img src="img/553b0e254774b.jpg" alt=""> </div>
@@ -90,48 +91,13 @@ include_once 'comm/dbconfig.php';
                         </div>
                     </a>
                 </dd>
-                <dd class="page-link">
-                    <a href="#">
-                        <div class="dealcard-img imgbox"> <img src="img/553b0e254774b.jpg" alt=""> </div>
-                        <div class="dealcard-block-right">
-                            <div class="brand">瑾晨0212<em class="location-right">2016-11-11</em></div>
-                            <div class="title ">
-										<span class="star">
-											<i class="full"></i>
-											<i class="full"></i>
-											<i class="full"></i>
-											<i class="half"></i>
-											<i></i>
-										</span>
-                            </div>
-                            <div class="price">
-                                <span>配送速度快质量好配送速度快质量好配送速度快质量好配送速度快质量好</span>
-                            </div>
-                        </div>
-                    </a>
-                </dd>
-                <dd class="page-link">
-                    <a href="#">
-                        <div class="dealcard-img imgbox"> <img src="img/553b0e254774b.jpg" alt=""> </div>
-                        <div class="dealcard-block-right">
-                            <div class="brand">瑾晨0212<em class="location-right">2016-11-11</em></div>
-                            <div class="title ">
-										<span class="star">
-											<i class="full"></i>
-											<i class="full"></i>
-											<i class="full"></i>
-											<i class="half"></i>
-											<i></i>
-										</span>
-                            </div>
-                            <div class="price">
-                                <span>配送速度快质量好配送速度快质量好配送速度快质量好配送速度快质量好</span>
-                            </div>
-                        </div>
-                    </a>
-                </dd>
+
             </dl>
         </div>
+
+
+
+
     </div>
 </div>
 </body>

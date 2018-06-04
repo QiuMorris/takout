@@ -78,19 +78,13 @@ include_once 'comm/dbconfig.php';
 <script>
     $(document).ready(function(){
         $("#con_pay").click(function(){
-
-            // alert(mob.length);
-
-
-
             $.post("ajax_order.php?act=con_pay",
                 {
-
                 },
                 function(data,status){
                     if(data.code == 200) {
                         layer.msg(data.msg);
-                        //window.location.href = "/saler_homepage.php";
+                        window.location.href = "/order.php";
                     }
                     else {
                         layer.msg(data.msg);

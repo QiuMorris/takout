@@ -101,13 +101,6 @@ class MysqliModel {
     }
 
 
-
-
-
-
-
-
-
     //查找 1.表名 2.条件 3.值 如果不添加条件或者值，就全部查询
     public function find($table = "", $key = "", $value = "")
 	{
@@ -266,8 +259,6 @@ class MysqliModel {
      * @return 成功返回查询记录 是二维数组$records 失败返回false
      */
     public function select() {
-
-
 		$sql_fields=array ();
 
 		foreach ($this->fields as $v)
@@ -326,9 +317,6 @@ class MysqliModel {
 		for ($x=0;$x<$n;$x++){$str = $str.$char;}
 		return $str;
 	}
-
-
-
 
 
     public function selectOne() {
@@ -428,7 +416,7 @@ class MysqliModel {
      */
     public function update($data = array(), $id) {
         $set_sql = "";
-//循环过滤属性把数组组装成 name='张三',age='183',email='aaa@bb.com'
+    //循环过滤属性把数组组装成 name='张三',age='183',email='aaa@bb.com'
         foreach ($data as $k => $v) {
             if (in_array($k, $this->fields)) {
                 if (get_magic_quotes_gpc()) {
@@ -461,7 +449,7 @@ class MysqliModel {
 	 * @param $id int  修改记录的id
 	 * @return 成功返回id 失败返回false
 	 */
-	public function updateBy($data = array(), $condition,$id) {
+	public function updateBy($data = array(), $condition, $id) {
 		$set_sql = "";
 
 		foreach ($data as $k => $v) {

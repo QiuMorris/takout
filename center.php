@@ -2,8 +2,10 @@
 session_start();
 if(!$_SESSION['user'])
 {
-    header('Location: /login.php');
+    header('Location: /login.php');//判断登录
 }
+
+//$mod_customer = new MysqliModel('customer');
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -20,22 +22,46 @@ if(!$_SESSION['user'])
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/mui.min.js"></script>
     <script src="js/others.js"></script>
     <script type="text/javascript" src="js/hmt.js" ></script>
     <script src="slick/slick.js" type="text/javascript" ></script>
-    <!--插件-->
-    <link rel="stylesheet" href="css/swiper.min.css">
-    <script src="js/swiper.jquery.min.js"></script>
+<!--    <link rel="stylesheet" href="css/swiper.min.css">-->
+    <script src="layui/layui.js"></script>
 
-    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
-    <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
+    <script>
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            var uploadInst = upload.render({
+                elem: '#select_photo' //绑定元素
+                ,url: '/ajax_user.php?act=select_photo' //上传接口
+                ,done: function(data){
+                    //上传完毕回调
+                    if(data.code == 200) {
+                        layer.msg(data.msg);
+                        //    console.log(data.msg);
+                        location.reload();
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+    </script>
+
 </head>
 <body>
 <!--header star-->
@@ -53,11 +79,13 @@ if(!$_SESSION['user'])
         <div class="warp clearfloat">
             <div class="h-top clearfloat box-s">
                 <div class="tu clearfloat fl">
-                    <img src="img/touxiang.png"/>
+                    <img src="<?php echo $sel_exephoto['sel_logo']?>" id="select_photo" width="20"/>
                 </div>
+
                 <div class="content clearfloat fl">
-                    <p class="hname"><?php echo $_SESSION['user']['cus_name']?> 欢迎回来</p>
-                    <p class="htel"><?php echo $_SESSION['user']['cus_tel']?></p>
+                    <p class="hname"><?php echo $_SESSION['user']['cus_name']?> </p>
+                    <p class="htel">欢迎回来</p>
+<!--                    --><?php //echo $_SESSION['user']['cus_tel']?>
                 </div>
             </div>
 
@@ -82,7 +110,7 @@ if(!$_SESSION['user'])
                             <img src="/img/next.png" width="20" style="margin-left: 250px">
                         </a>
                     </li>
-                    <li class="box-s">
+                    <li class="box-s" style="display: none">
                         <a href="setup.php">
                             <p class="fl">账户设置</p>
                             <img src="/img/next.png" width="20" style="margin-left: 250px">
@@ -97,6 +125,12 @@ if(!$_SESSION['user'])
                     <li class="box-s">
                         <a href="saler_homepage.php">
                             <p class="fl">商家主页</p>
+                            <img src="/img/next.png" width="20" style="margin-left: 250px">
+                        </a>
+                    </li>
+                    <li class="box-s">
+                        <a href="del_setup.php">
+                            <p class="fl">骑手主页</p>
                             <img src="/img/next.png" width="20" style="margin-left: 250px">
                         </a>
                     </li>

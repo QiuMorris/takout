@@ -2,12 +2,20 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+$mod_seller = new MysqliModel('seller');
+$reSel=$mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne();
+
+
+//var_dump($reSel);
+//exit;
+
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>评价</title>
+    <title>评价订单</title>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -18,100 +26,85 @@ include_once 'comm/dbconfig.php';
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-    <script src="js/hmt.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script src="js/swiper.min.js" type="text/javascript" ></script>
+
+
+    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
+    <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a href="javascript:history.go(-1)" class="fl fanhui"><img href="order.php" src="img/back.png" width="20"></a>
+    <a href="javascript:history.go(-1)" class="fl fanhui"><img src="img/back.png" width="20"></a>
     <div class="header-tit">
-        评价
+        服务评价
     </div>
 </header>
-<div id="main" class="mui-clearfix">
+<div id="main" class="mui-clearfix" style="margin-top: 50px;">
     <div class="assess clearfloat">
         <div class="top clearfloat box-s">
             <div class="tu fl clearfloat">
-                <img src="img/21.jpg"/>
+                <img src="<?php echo $reSel['sel_logo']?>" width="50" height="50"/>
             </div>
             <div class="pinfen fl clearfloat">
-                <p class="tit">上上客美食城自助火锅店</p>
-                <div class="assess-right">
-                    <img onclick="level(1)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(2)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(3)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(4)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(5)" src="img/detail-iocn001.png"/>
-                </div>
+                <p class="tit"><?php echo $reSel['sel_name']?></p>
+                <p style="margin-top: 20px"><?php echo $reSel['sel_address']?>店</p>
             </div>
         </div>
-        <textarea rows="4" class="box-s" placeholder="请写下对本次消费的感受吧，对他人帮助很大哦" ></textarea>
+
+        <textarea id="content" name="content" rows="4" class="box-s" placeholder="请写下对本次消费的感受吧，对他人帮助很大哦" ></textarea>
+        <input type="hidden" name="sel_id" id="sel_id" value="<?php echo $_GET['sel_id']?>">
+        <input type="hidden" name="order_id" id="order_id" value="<?php echo $_GET['order_id']?>">
         <div class="bottom clearfloat box-s fl">
-            <p class="ztpinfen">整体评分</p>
+            <p class="ztpinfen" style="color: #0EC0A8">整体评分</p>
             <ul>
                 <li>
-                    派送速度
+                    派送速度：
                 </li>
-                <li class="assess-right">
-                    <img onclick="level(1)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(2)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(3)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(4)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(5)" src="img/detail-iocn001.png"/>
-                </li>
-            </ul>
-            <ul>
                 <li>
-                    店员服务
-                </li>
-                <li class="assess-right">
-                    <img onclick="level(1)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(2)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(3)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(4)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(5)" src="img/detail-iocn001.png"/>
+                    <input type="radio" name="assess" value="0" />好评&nbsp;&nbsp;
+                    <input type="radio" name="assess" value="1" />中评&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="assess" value="2" />差评
                 </li>
             </ul>
-            <ul>
-                <li>
-                    商品体验
-                </li>
-                <li class="assess-right">
-                    <img onclick="level(1)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(2)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(3)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(4)" src="img/detail-iocn001.png"/>
-                    <img onclick="level(5)" src="img/detail-iocn001.png"/>
-                </li>
-            </ul>
+
         </div>
     </div>
 </div>
-<a href="#" class="address-add fl ra3">
+<a class="address-add fl ra3" id="sub_ass">
     提交
 </a>
-</body>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script type="text/javascript">
-    function level(s)
-    {
-        var str = '';
-        var k = 6-s;
-        for(i=1;i<s+1;i++)			{
-            str += "<img onclick='level("+i+")' src='img/detail-iocn01.png'/>";
-        }
-        for(j=1;j<k;j++)
-        {
-            var d=j+s
-            str += "<img onclick='level("+d+")' src='img/detail-iocn001.png'/>";
-        }
-        $('.assess-right').html(str);
-    }
+
+<script>
+    $(document).ready(function(){
+        $("#sub_ass").click(function(){
+            var val =$("input[name='assess']:checked").val();
+            var content =$("#content").val();
+            var sel_id =$("#sel_id").val();
+            var order_id =$("#order_id").val();
+
+            $.post("ajax_order.php?act=updateAssess",
+                {
+                    assess_info:content,
+                    assess_type:val,
+                    sel_id:sel_id,
+                    order_id:order_id
+                },
+                function(data,status){
+                    if(data.code == 200) {
+                        layer.msg(data.msg);
+                        window.location.href = "/order.php";
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                },"JSON");
+        });
+    });
 </script>
+
+</body>
+
 </html>
 

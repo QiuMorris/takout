@@ -2,6 +2,12 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+$mod_seller = new MysqliModel('seller');
+$arr_selinfo = $mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne();
+
+//var_dump($arr_selinfo);
+//exit;
 ?>
 
 <!DOCTYPE html>
@@ -61,18 +67,12 @@ include_once 'comm/dbconfig.php';
         </ul>
         <!--头部切换结束-->
         <div id="shangjia_detail" class="page-center-box dldetail">
-            <div class="imgInfor mb10">
-                <img src="img/thumb_553a14d84d4f2.jpg">
-                <div class="nr">
-                    <h2 class="overflow_clear">张府私房菜</h2>
-                    <p>月售<b class="fontcl1">58</b>份&nbsp;&nbsp;总售<b class="fontcl1">102</b>份</p>
-                </div>
-            </div>
             <div class="detailNr">
                 <h3>商家信息</h3>
                 <div class="nr mb10">
                     <p>店铺地址：四川省成都市锦江区望江西路与东至路交口</p>
-                    <p>营业时间：8: 00-19：00</p>
+                    <p>店铺联系电话：024-578349753</p>
+                    <p>店铺特色：</p>
                 </div>
             </div>
         </div>

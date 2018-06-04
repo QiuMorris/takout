@@ -42,12 +42,14 @@ function getfood($order_number)
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
+    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
+    <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
 
 </head>
 <body>
@@ -108,11 +110,11 @@ function getfood($order_number)
 
                         <div class="order-bottom clearfloat box-s" style="margin-top: 20px;">
                             <?php if($order_type==0){?>
-                            <a href="#" class="fr" >接单</a>
+                                <a onclick="jiedan(<?php echo $valueOrder['order_id']?>)" class="fr" >接单</a>
                             <?php }elseif($order_type==1){?>
-                             <a href="#" class="fr" >处理中</a>
+                                <a class="fr" >处理中</a>
                             <?php }elseif($order_type==2){?>
-                                <a href="#" class="fr" >已完成</a>
+                                <a class="fr" >已完成</a>
                             <?php }?>
                         </div>
                     </div>
@@ -127,6 +129,25 @@ function getfood($order_number)
     </div>
 </div>
 
+<script>
+function jiedan(order_id)
+{
+    $.post("ajax_seller.php?act=jiedan",
+        {
+            order_id:order_id
+        },
+        function(data){
+            if(data.code == 200) {
+                layer.msg('接单成功!');
+                // window.location.href = "/saler_thingManage.php";
+                location.reload();
+            }
+            else {
+                layer.msg(data.msg);
+            }
+        },"JSON");
+}
+</script>
 </body>
 </html>
 

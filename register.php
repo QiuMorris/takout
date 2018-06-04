@@ -21,24 +21,9 @@ include_once 'comm/dbconfig.php';
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
     <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
-    <style>
-        @font-face {
-            font-family: 'cate_icon';
-            src: url(images/img/cate4.woff) format("woff"), url(images/img/cate4.otf);
-        }
-
-        @font-face {
-            font-family: 'base_icon';
-            src: url(images/img/base14.woff) format("woff"), url(images/img/base14.otf);
-        }
-
-        .waimai .msg-ft .msg-btn {
-            color: #ffd300;
-        }
-    </style>
-
     <link href="css/eve.a4872f12.css" rel="stylesheet" onload="MT.pageData.eveTime=Date.now()" />
     <link href="css/login-wm.10a0cb5a.css" rel="stylesheet" onload="MT.pageData.eveTime=Date.now()" />
+
     <style>
         .nav {
             text-align: center;
@@ -95,14 +80,31 @@ include_once 'comm/dbconfig.php';
         }
     </style>
 
+    <style>
+        @font-face {
+            font-family: 'cate_icon';
+            src: url(images/img/cate4.woff) format("woff"), url(images/img/cate4.otf);
+        }
+
+        @font-face {
+            font-family: 'base_icon';
+            src: url(images/img/base14.woff) format("woff"), url(images/img/base14.otf);
+        }
+
+        .waimai .msg-ft .msg-btn {
+            color: #ffd300;
+        }
+    </style>
 
 </head>
 
 <body id="account-login" class="waimai" data-com="pagecommon" data-page-id="100040" data-iswebview='false'>
 <header class="navbar">
-    <img src="/img/back.png" width="30"  style="margin-top: 10px" href="login.php">
-    <h1 class="nav-header">
-        新用户注册
+    <div class="nav-wrap-left">
+        <a class="react back" href="login.php"><img src="/img/back.png" width="20"></a>
+    </div>
+    <h1 style="margin-left: 80px; margin-top: 16px">
+        新&nbsp;用&nbsp;户&nbsp;注&nbsp;册
     </h1>
 </header>
 
@@ -148,6 +150,19 @@ include_once 'comm/dbconfig.php';
                         <img class="login-icon" src="img/icon_phone_check_code@2x.png" />
                         <input class="input-weak kv-k J_input_sms J-input" name="code" type="password" pattern="[0-9]+" placeholder="请再次输入新密码" id="ensurepassword">
                     </dd>
+
+                    <dd class="kv-line-r dd-padding" data-com="smsBtn_quick" data-requrl="/account/custom/mobilelogincode2">
+                        <img class="login-icon icon-align" src="img/mine.png" />&nbsp;&nbsp;
+                        <div style="margin-top: -5px; ">
+                            <select name="usertype" id="usertype" class="change" style="width: 290px; height: 30px; border:0px solid;">
+<!--                                <option value="">请选择用户类型</option>-->
+                                <option value="0">普通用户</option>
+                                <option value="1">商家用户</option>
+                                <option value="2">骑手用户</option>
+                            </select>
+                        </div>
+                    </dd>
+
                 </dl>
             </dd>
         </dl>
@@ -159,9 +174,6 @@ include_once 'comm/dbconfig.php';
     </form>
 </div>
 
-<footer class="J-wm-footer">
-    <div class="explanation"><span>说明:注册/登录说明您已同意<a class="underline" href="http://i.meituan.com/about/terms">《食刻用户协议》</a></span></div>
-</footer>
 
 <script>
     $(document).ready(function(){
@@ -169,6 +181,7 @@ include_once 'comm/dbconfig.php';
             var mob=$("#login-mobile").val();
             var password=$("#password").val();
             var ensurepassword=$("#ensurepassword").val();
+            var usertype=$("#usertype").val();
            // alert(mob.length);
 
             if(mob.length < 1 || password.length <1 || ensurepassword.length <1) {
@@ -183,7 +196,8 @@ include_once 'comm/dbconfig.php';
             $.post("ajax_user.php?act=add_user",
                 {
                     cus_tel:mob,
-                    cus_password:password
+                    cus_password:password,
+                    user_type:usertype
                 },
                 function(data,status){
                     if(data.code == 200) {

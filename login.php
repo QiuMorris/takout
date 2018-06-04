@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>食刻网账号登录-手机食刻官网</title>
+    <title>食刻网账号登录</title>
     <meta name="meituan_check" />
     <meta name="applicable-device" content="mobile">
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
@@ -97,7 +97,7 @@
         <a class="react back" href="index.php"><img src="/img/back.png" width="20"></a>
     </div>
     <h1 class="nav-header">
-        登录
+        登&nbsp;录
     </h1>
     <div class="nav-wrap-right">
         <a href="register.php">
@@ -149,6 +149,18 @@
                         <input class="input-weak kv-k J_input_sms J-input" name="code" type="password" pattern="[0-9]+" placeholder="请输入密码" id="password">
                         <div class="to-del J-to-del-code J-to-del" style="display: none"></div>
                     </dd>
+                    <dd class="kv-line-r dd-padding" data-com="smsBtn_quick" data-requrl="/account/custom/mobilelogincode2">
+                        <img class="login-icon icon-align" src="img/mine.png" />&nbsp;&nbsp;
+
+                        <div style="margin-top: -5px; ">
+                            <select name="usertype" id="usertype" class="change" style="width: 290px; height: 30px; border:0px solid;">
+                                <option value="0">普通用户</option>
+                                <option value="1">商家用户</option>
+                                <option value="2">骑手用户</option>
+                            </select>
+                        </div>
+                    </dd>
+
                 </dl>
             </dd>
         </dl>
@@ -158,14 +170,15 @@
     </form>
 </div>
 
-<ul class="subline">
-    <li>
-        <a href="/register.php">立即注册</a>
-    <li class="pull-right">
-        <a href="https://i.meituan.com/risk2/resetreq">找回密码</a>
-</ul>
+<!--<ul class="subline">-->
+<!--    <li>-->
+<!--        <a href="/register.php">立即注册</a>-->
+<!--    <li class="pull-right">-->
+<!--        <a>找回密码</a>-->
+<!--</ul>-->
+
 <footer class="J-wm-footer">
-    <div class="explanation"><span>说明:注册/登录说明您已同意<a class="underline" href="http://i.meituan.com/about/terms">《食刻用户协议》</a></span></div>
+    <div class="explanation"><span>说明:注册/登录说明您已同意《食刻用户协议》</a></span></div>
 </footer>
 
 
@@ -174,15 +187,18 @@
         $("#user_login").click(function(){
             var mob=$("#login-mobile").val();
             var password=$("#password").val();
+            var usertype=$("#usertype").val();
+
             //alert(mob);
             $.post("ajax_user.php?act=login",
                 {
                     cus_tel:mob,
-                    cus_password:password
+                    cus_password:password,
+                    user_type:usertype
                 },
                 function(data,status){
                     if(data.code == 200) {
-                        window.location.href = "/index.php";
+                        window.location.href = data.url;
                     }
                     else {
                         alert(data.msg);

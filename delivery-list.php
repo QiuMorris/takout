@@ -6,7 +6,12 @@ include_once 'comm/MysqliModel.class.php';
 
 
 $mod_food = new MysqliModel('food');
-$arr_food = $mod_food->where(array('sel_id'=>$_GET['id'], 'food_state'=>1))->select();
+$mod_seller = new MysqliModel('seller');
+
+$arr_food = $mod_food->where(array('sel_id'=>$_GET['sel_id'], 'food_state'=>1))->select();
+$arr_selinfo = $mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne();
+//var_dump($arr_selinfo);
+//exit;
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +34,32 @@ $arr_food = $mod_food->where(array('sel_id'=>$_GET['id'], 'food_state'=>1))->sel
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
     <link href="layui/css/modules/layer/default/layer.css" rel="stylesheet"  />
 
+    <script>
+        function tab_change(number) {
+            if(number == 1) {
+                $('#ele').css('display','block');
+                $('#footer').css('display','block');
+                $('#shangjia_assess').css('display','none');
+                $('#shangjia_detail').css('display','none');
+                $("#shangjia_tab li a").removeClass("on");
+                $("#tab1").addClass("on");
+            }else if(number == 2) {
+                $('#ele').css('display','none');
+                $('#footer').css('display','none');
+                $('#shangjia_assess').css('display','block');
+                $('#shangjia_detail').css('display','none');
+                $("#shangjia_tab li a").removeClass("on");
+                $("#tab2").addClass("on");
+            }else if(number == 3) {
+                $('#ele').css('display','none');
+                $('#footer').css('display','none');
+                $('#shangjia_assess').css('display','none');
+                $('#shangjia_detail').css('display','block');
+                $("#shangjia_tab li a").removeClass("on");
+                $("#tab3").addClass("on");
+            }
+        }
+    </script>
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
@@ -44,26 +75,26 @@ $arr_food = $mod_food->where(array('sel_id'=>$_GET['id'], 'food_state'=>1))->sel
         <div class="store-header clearfix">
             <div class="tu">
                 <span></span>
-                <img src="img/food.PNG"/>
+                <img src="<?php echo $arr_selinfo['sel_logo']?>" width="80" height="80"/>
             </div>
             <div class="right fl">
-                <p>正新鸡排大洋百货店</p>
+                <p><?php echo $arr_selinfo['sel_name']?></p>
+                <p>欢迎您的光临</p>
             </div>
             <div class="tit">
-                <span></span>
-                <p>欢迎光临！本店新品上市，欢迎品尝！</p>
+                <p><?php echo $arr_selinfo['sel_info']?></p>
             </div>
         </div>
         <!--店铺头部结束-->
         <ul id="shangjia_tab">
             <li>
-                <a href="delivery-list.php" class="on">菜单</a>
+                <a onclick="tab_change(1)" id="tab1" class="on">菜单</a>
             </li>
             <li>
-                <a href="dlplun.php">评价</a>
+                <a onclick="tab_change(2)" id="tab2">评价</a>
             </li>
             <li>
-                <a href="dldetail.php">详情</a>
+                <a onclick="tab_change(3)" id="tab3">详情</a>
             </li>
         </ul>
         <!--头部切换结束-->
@@ -71,13 +102,7 @@ $arr_food = $mod_food->where(array('sel_id'=>$_GET['id'], 'food_state'=>1))->sel
             <div class="frame-set-left">
                 <ul>
                     <li class="active" rel="all">
-                        <a href="javascript:void(0);">全部分类</a>
-                    </li>
-                    <li rel="cate_1">
-                        <a href="javascript:void(0);">饭食类</a>
-                    </li>
-                    <li rel="cate_2">
-                        <a href="javascript:void(0);">自助餐</a>
+                        <a href="javascript:void(0);">全部菜品</a>
                     </li>
                 </ul>
             </div>
@@ -161,6 +186,52 @@ $arr_food = $mod_food->where(array('sel_id'=>$_GET['id'], 'food_state'=>1))->sel
             },"JSON");
     }
 </script>
+
+<!--评价界面内容-->
+    <div id="shangjia_assess" class="page-center-box dldetail" style="display: none">
+        <div class="pldengji">
+            <ul>
+                <li class="cur"><a href="#">好评</a></li>
+                <li><a href="#">中评</a></li>
+                <li><a href="#">差评</a></li>
+            </ul>
+        </div>
+        <dl class="dealcard">
+
+            <dd class="page-link">
+                <a href="#">
+                    <div class="dealcard-img imgbox"> <img src="img/553b0e254774b.jpg" alt=""> </div>
+                    <div class="dealcard-block-right">
+                        <div class="brand">瑾晨0212<em class="location-right">2016-11-11</em></div>
+                        <div class="title ">
+                                            <span class="star">
+                                                <i class="full"></i>
+                                                <i class="full"></i>
+                                                <i class="full"></i>
+                                                <i class="half"></i>
+                                                <i></i>
+                                            </span>
+                        </div>
+                        <div class="price">
+                            <span>配送速度快质量好配送速度快质量好配送速度快质量好配送速度快质量好</span>
+                        </div>
+                    </div>
+                </a>
+            </dd>
+
+        </dl>
+    </div>
+
+    <div id="shangjia_detail" class="page-center-box dldetail" style="display: none">
+        <div class="detailNr">
+            <h3>商家信息</h3>
+            <div class="nr mb10">
+                <p>店铺地址：四川省成都市锦江区望江西路与东至路交口</p>
+                <p>店铺联系电话：024-578349753</p>
+                <p>店铺特色：</p>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -49,7 +49,7 @@ $sel_foodlist = $mod_food->where(array('sel_id'=>$_SESSION['user']['sel_id']))->
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a class="fl fanhui" href="saler_homepage.php"><img src="img/backw.png" width="20" ></a>
+    <a href="javascript:history.go(-1)"class="fl fanhui" href="saler_homepage.php"><img src="img/backw.png" width="20" ></a>
     <div class="header-tit">
         菜单管理
     </div>

@@ -7,6 +7,7 @@ include_once 'comm/MysqliModel.class.php';
 $mod_customer = new MysqliModel('customer');
 $mod_seller = new MysqliModel('seller');
 $mod_food = new MysqliModel('food');
+$mod_order = new MysqliModel('myorder');
 
 if($_GET['act'] == 'upStoreuser') {
 
@@ -240,4 +241,72 @@ else if($_GET['act'] == 'up_foodState')
 
     echo json_encode($jsonArr);
     exit;
+}
+else if($_GET['act'] == 'jiedan')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['order_type'] = 1;
+    $reorder = $mod_order->updateBy($data,'order_id',$_POST['order_id']);
+
+    if ($reorder) {
+        $jsonArr["msg"] = "接单成功";
+        $jsonArr["code"] = 200;
+    }
+    else {
+        $jsonArr["msg"] = "接单失败";
+        $jsonArr["code"] = 400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'del-jiedan')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['order_type'] = 2;
+    $redelorder = $mod_order->updateBy($data,'order_id',$_POST['order_id']);
+
+    if ($redelorder) {
+        $jsonArr["msg"] = "接单成功";
+        $jsonArr["code"] = 200;
+    }
+    else {
+        $jsonArr["msg"] = "接单失败";
+        $jsonArr["code"] = 400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'del-arrive')
+{
+    $jsonArr = array();
+    $jsonArr["msg"] = "错误";
+    $jsonArr["code"] = 400;
+
+    $data['order_type'] = 3;
+    $redelorder = $mod_order->updateBy($data,'order_id',$_POST['order_id']);
+
+    if ($redelorder) {
+        $jsonArr["msg"] = "配送成功";
+        $jsonArr["code"] = 200;
+    }
+    else {
+        $jsonArr["msg"] = "配送失败";
+        $jsonArr["code"] = 400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+
+else if($_GET['act'] == 'add-seller')
+{
+
 }

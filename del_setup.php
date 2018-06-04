@@ -2,6 +2,12 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+if(!$_SESSION['user'])
+{
+    header('Location: /saler_homepage.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,12 +61,12 @@ include_once 'comm/dbconfig.php';
     <div id="main">
         <div class="plist clearfloat data">
             <ul>
-                <li class="clearfloat touxiang">
-                    <a href="#">
-                        <p class="fl">头像</p>
-                        <i class="fr" ><img src="img/tou.png" id="test1"></i>
-                    </a>
-                </li>
+<!--                <li class="clearfloat touxiang">-->
+<!--                    <a href="#">-->
+<!--                        <p class="fl">头像</p>-->
+<!--                        <i class="fr" ><img src="img/tou.png" id="test1"></i>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li class="clearfloat">
                     <a href="del_homepage1.php">
                         <p class="fl">任务管理</p>
@@ -73,18 +79,18 @@ include_once 'comm/dbconfig.php';
                         <img src="/img/next.png" width="20" style="margin-left: 242px; margin-top: 15px">
                     </a>
                 </li>
-                <li class="clearfloat">
-                    <a href="#">
-                        <p class="fl">我的手机</p>
-                        <img src="/img/next.png" width="20" style="margin-left: 242px; margin-top: 15px">
-                    </a>
-                </li>
-                <li class="clearfloat">
-                    <a href="#">
-                        <p class="fl">我的评价</p>
-                        <img src="/img/next.png" width="20" style="margin-left: 242px; margin-top: 15px">
-                    </a>
-                </li>
+<!--                <li class="clearfloat">-->
+<!--                    <a href="#">-->
+<!--                        <p class="fl">我的手机</p>-->
+<!--                        <img src="/img/next.png" width="20" style="margin-left: 242px; margin-top: 15px">-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="clearfloat">-->
+<!--                    <a href="#">-->
+<!--                        <p class="fl">我的评价</p>-->
+<!--                        <img src="/img/next.png" width="20" style="margin-left: 242px; margin-top: 15px">-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li class="clearfloat">
                     <a href="#">
                         <p class="fl">我的钱包</p>

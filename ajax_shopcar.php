@@ -16,12 +16,10 @@ if ($_GET['act']=='cart') {
         exit;
     }
 
-
     $tag=0;
     foreach ($_SESSION['cartlist'] as $k=>$valfood) {
         if ($valfood['food_id']==$_POST['food_id'] )
         {
-            //
                 if($_POST['oper']=="add")
                 {
                     $_SESSION['cartlist'][$k]['num']=$_SESSION['cartlist'][$k]['num']+1;
@@ -36,7 +34,6 @@ if ($_GET['act']=='cart') {
                         $sum= 0;
                         $tag=1;
                         unset($_SESSION['cartlist'][$k]);
-
                     }
                 }
                 $tag=1;
@@ -55,7 +52,6 @@ if ($_GET['act']=='cart') {
                 $sum= $araryfood['num'];
             }
 
-
         }
 
     }
@@ -65,7 +61,6 @@ if ($_GET['act']=='cart') {
         $sumPr = $valfood['food_price'] * $valfood['num'];
         $sumPrice+=$sumPr;
     }
-
 
         $jsonArr["msg"]="操作成功";
         $jsonArr["code"]=200;
@@ -77,7 +72,8 @@ if ($_GET['act']=='cart') {
     echo json_encode($jsonArr);
     exit;
 }
-elseif ($_GET['act']=='select_add') {
+
+else if ($_GET['act']=='select_add') {
     $mod_address = new MysqliModel('address');
     $sql = "UPDATE address SET is_default = 0 WHERE cus_id = {$_SESSION['user']['cus_id'] }";
     $mod_address->query($sql);
@@ -91,7 +87,8 @@ elseif ($_GET['act']=='select_add') {
     echo json_encode($jsonArr);
     exit;
 }
-elseif ($_GET['act']=='delete_add') {
+
+else if ($_GET['act']=='delete_add') {
     $mod_address = new MysqliModel('address');
     $re = $mod_address->delete($_POST['id']);
     if ($re) {

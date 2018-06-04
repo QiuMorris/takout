@@ -24,16 +24,13 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="layui/layui.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
-
     <script src="js/fastclick.js"></script>
     <script src="js/mui.min.js"></script>
     <script type="text/javascript" src="js/hmt.js" ></script>
-
     <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
         layui.use('upload', function(){
@@ -60,7 +57,7 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
         菜品信息管理中心
     </div>
 </header>
-<div id="container">
+<div id="container" style="margin-top: 50px">
     <div id="main">
         <div class="plist clearfloat data">
             <ul>
@@ -140,8 +137,7 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
                 layer.msg('对不起，菜品信息输入不完全！');
                 return ;
             }
-
-
+            
             $.post("ajax_seller.php?act=save_food",
                 {
                     food_name:food_name,

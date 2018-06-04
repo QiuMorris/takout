@@ -31,6 +31,14 @@ $arr_selpayinfo=$mod_payinfo->where(array('user_id'=>$_SESSION['user']['sel_id']
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
+
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/others.js"></script>
+    <script type="text/javascript" src="js/hmt.js" ></script>
+    <script src="slick/slick.js" type="text/javascript" ></script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <script src="js/swiper.jquery.min.js"></script>
 </head>
 <body>
 <!--header star-->
@@ -52,8 +60,6 @@ $arr_selpayinfo=$mod_payinfo->where(array('user_id'=>$_SESSION['user']['sel_id']
                             订单号：<?php echo $valuePayinfo['order_id']?>
                         </div>
                         <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
-
-
 
                         <div class="dealcard-message box" style="margin-top: 5px;">
                             <span style="color: #0EC0A8">金额：<?php echo $valuePayinfo['order_value']?></span>
@@ -79,13 +85,6 @@ $arr_selpayinfo=$mod_payinfo->where(array('user_id'=>$_SESSION['user']['sel_id']
 
 
 </body>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script src="js/mui.min.js"></script>
-<script src="js/others.js"></script>
-<script type="text/javascript" src="js/hmt.js" ></script>
-<script src="slick/slick.js" type="text/javascript" ></script>
-<!--插件-->
-<link rel="stylesheet" href="css/swiper.min.css">
-<script src="js/swiper.jquery.min.js"></script>
+
 </html>
 

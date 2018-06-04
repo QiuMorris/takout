@@ -36,8 +36,6 @@ $sel_list = $mod_sell_photo->select();
     </div>
 </header>
 
-
-
 <div id="container">
     <div id="main">
         <div class="guess-like">
@@ -46,7 +44,7 @@ $sel_list = $mod_sell_photo->select();
                     <dl class="list">
                         <?php foreach ($sel_list as $key=>$value):?>
                         <dd>
-                            <a href="delivery-list.php?id=<?php echo $value['sel_id']?>" class="react">
+                            <a href="delivery-list.php?sel_id=<?php echo $value['sel_id']?>" class="react">
                                 <div class="dealcard">
                                     <div class="dealcard-img imgbox">
                                         <span></span>

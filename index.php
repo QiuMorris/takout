@@ -38,34 +38,34 @@ include_once 'comm/dbconfig.php';
 <div id="container">
     <div id="main">
         <div id="scroller">
-            <section class="banner">
-                <div class="swiper-container swiper-container1">
-                    <div class="swiper-wrapper bannerwidth">
-                        <div class="swiper-slide swiper-slide-duplicate">
-                            <a href="#">
-                                <img src="img/55dec2a5c2fa3.png">
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img src="img/55dec2a5c2fa3.png">
-                            </a>
-                        </div>
-                        <div class="swiper-slide swiper-slide-duplicate">
-                            <a href="#">
-                                <img src="img/55dec2a5c2fa3.png">
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img src="img/55dec2a5c2fa3.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination swiper-pagination1">
-                    </div>
-                </div>
-            </section>
+<!--            <section class="banner">-->
+<!--                <div class="swiper-container swiper-container1">-->
+<!--                    <div class="swiper-wrapper bannerwidth">-->
+<!--                        <div class="swiper-slide swiper-slide-duplicate">-->
+<!--                            <a href="#">-->
+<!--                                <img src="img/55dec2a5c2fa3.png">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="swiper-slide">-->
+<!--                            <a href="#">-->
+<!--                                <img src="img/55dec2a5c2fa3.png">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="swiper-slide swiper-slide-duplicate">-->
+<!--                            <a href="#">-->
+<!--                                <img src="img/55dec2a5c2fa3.png">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="swiper-slide">-->
+<!--                            <a href="#">-->
+<!--                                <img src="img/55dec2a5c2fa3.png">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="swiper-pagination swiper-pagination1">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
 
             <section class="slider">
                 <div class="swiper-container swiper-container2">
@@ -149,7 +149,7 @@ include_once 'comm/dbconfig.php';
                 <!--专享推荐-->
                 <div class="sy_title mb10">
                     <span class="left">热门推荐</span>
-                    <a href="#" class="fr morethree">更多&gt;&gt;</a>
+<!--                    <a href="#" class="fr morethree">更多&gt;&gt;</a>-->
                 </div>
                 <div class="sy_recmd">
                     <div class="sy_recmd_list_box">
@@ -157,14 +157,14 @@ include_once 'comm/dbconfig.php';
                             <li class="sy_recmd_list">
                                 <div class="box">
                                     <div class="pub_img">
-                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                        <a href=""><img src="img/KFC.png" width="165" height="120"></a>
                                     </div>
                                     <div class="pub_wz">
-                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
+                                        <h3 class="overflow_clear"><a href="#">肯德基</a></h3>
                                         <div class="nr_box">
                                             <p class="fl fontcl2">¥25</p>
                                             <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
+<!--                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>-->
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,6 @@ include_once 'comm/dbconfig.php';
                                         <div class="nr_box">
                                             <p class="fl fontcl2">¥25</p>
                                             <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -202,74 +201,13 @@ include_once 'comm/dbconfig.php';
                             <li class="sy_recmd_list">
                                 <div class="box">
                                     <div class="pub_img">
-                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
+                                        <a href="mall-detail.html"><img src="img/yoshihoya.jpg" width="145" height="145"></a>
                                     </div>
                                     <div class="pub_wz">
                                         <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
                                         <div class="nr_box">
                                             <p class="fl fontcl2">¥25</p>
                                             <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="sy_recmd_list">
-                                <div class="box">
-                                    <div class="pub_img">
-                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
-                                    </div>
-                                    <div class="pub_wz">
-                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
-                                        <div class="nr_box">
-                                            <p class="fl fontcl2">¥25</p>
-                                            <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="sy_recmd_list">
-                                <div class="box">
-                                    <div class="pub_img">
-                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
-                                    </div>
-                                    <div class="pub_wz">
-                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
-                                        <div class="nr_box">
-                                            <p class="fl fontcl2">¥25</p>
-                                            <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="sy_recmd_list">
-                                <div class="box">
-                                    <div class="pub_img">
-                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
-                                    </div>
-                                    <div class="pub_wz">
-                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
-                                        <div class="nr_box">
-                                            <p class="fl fontcl2">¥25</p>
-                                            <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="sy_recmd_list">
-                                <div class="box">
-                                    <div class="pub_img">
-                                        <a href="mall-detail.html"><img src="img/thumb_543ba5688cb7b.jpg" width="145" height="145"></a>
-                                    </div>
-                                    <div class="pub_wz">
-                                        <h3 class="overflow_clear"><a href="#">喜来登饭店</a></h3>
-                                        <div class="nr_box">
-                                            <p class="fl fontcl2">¥25</p>
-                                            <span class="fl black9">[优惠活动]</span>
-                                            <p class="fr price fontcl2"><span class="black9">已售50</span></p>
                                         </div>
                                     </div>
                                 </div>

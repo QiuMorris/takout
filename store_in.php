@@ -107,10 +107,10 @@ $sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id
                 <div class="top clearfloat">
                     <ul>
                         <?php if($sel_exephoto['sel_license']){ ?>
-                            <img  id="upStore1" src="<?php echo $sel_exephoto[sel_license] ?>" width="162" height="122" />';
+                            <img id="upStore1" src="<?php echo $sel_exephoto[sel_license] ?>" width="162" height="122" />';
                         <?php }else{?>
                         <li class="fl ra3" id="upStore1">
-                            <img src="img/jia.png"  width="30">
+                            <img src="img/jia.png" width="30">
                             <p>添加营业执照</p>
                         </li>
                         <?php }?>

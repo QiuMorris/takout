@@ -52,7 +52,7 @@ function getStore($seller_id)
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/iscroll.js"></script>
@@ -60,7 +60,7 @@ function getStore($seller_id)
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
-
+    <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
@@ -76,8 +76,8 @@ function getStore($seller_id)
 <div class="screening">
     <ul>
         <li class="Newband" ><a href="del_homepage1.php">新任务</a></li>
-        <li class="Waiting" ><a href="del_homepage1.php?order_type=2">待取货</a></li>
-        <li class="Delivering" ><a href="del_homepage1.php?order_type=3">待送达</a></li>
+        <li class="Waiting" ><a href="del_homepage1.php?order_type=2">配送中</a></li>
+        <li class="Delivering" ><a href="del_homepage1.php?order_type=3">已完成</a></li>
     </ul>
 </div>
 
@@ -94,11 +94,11 @@ function getStore($seller_id)
 
 
                         <?php if($order_type==1){?>
-                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 接单 </button>
+                            <button onclick="jiedan(<?php echo $valueOrder['order_id']?>)"" class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 接单 </button>
                         <?php }elseif($order_type==2){?>
-                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 开始配送 </button>
+                            <button onclick="arrive(<?php echo $valueOrder['order_id']?>)"" class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 已送达 </button>
                         <?php }elseif($order_type==3){?>
-                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 已送达 </button>
+                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 已完成 </button>
                         <?php }?>
 
                     </div>
@@ -158,6 +158,44 @@ function getStore($seller_id)
 
     </div>
 </div>
+
+<script>
+    function jiedan(order_id)
+    {
+        $.post("ajax_seller.php?act=del-jiedan",
+            {
+                order_id:order_id
+            },
+            function(data){
+                if(data.code == 200) {
+                    layer.msg('接单成功!');
+                    // window.location.href = "/saler_thingManage.php";
+                    location.reload();
+                }
+                else {
+                    layer.msg(data.msg);
+                }
+            },"JSON");
+    }
+
+    function arrive(order_id)
+    {
+        $.post("ajax_seller.php?act=del-arrive",
+            {
+                order_id:order_id
+            },
+            function(data){
+                if(data.code == 200) {
+                    layer.msg('派送成功!');
+                    // window.location.href = "/saler_thingManage.php";
+                    location.reload();
+                }
+                else {
+                    layer.msg(data.msg);
+                }
+            },"JSON");
+    }
+</script>
 
 </body>
 </html>
