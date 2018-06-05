@@ -104,7 +104,7 @@ else if($_GET['act']=='login')
             $_SESSION['user']=$recus;
             $jsonArr["msg"]="登录成功";
             $jsonArr["code"]=200;
-            $jsonArr["url"]="/index.php";
+            $jsonArr["url"]="/tuan.php";
 
 //            $recus=$mod_sel->where(array('cus_id'=>$recus['cus_id']))->selectOne();
 //            $_SESSION['user']['sel_id'] = $recus['sel_id'];

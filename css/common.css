@@ -5261,7 +5261,7 @@ label {
 }
 
 .h-top .content {
-	width: 60%;
+	width: 65%;
 	margin-left: 5%;
 }
 
@@ -5490,7 +5490,7 @@ a.center-btn {
 /*优惠券*/
 .notice { width: 100%; overflow: hidden; }
 .notice .tab-hd { height: .5rem; background-color: #fff; border-bottom: 1px solid #DDD8CD;}
-.notice .tab-hd li{ float: left; font-size: .14rem; width: 33.33%; text-align: center; height: .5rem; line-height: .5rem;}
+.notice .tab-hd li{ float: left; font-size: .14rem; width: 25%; text-align: center; height: .5rem; line-height: .5rem;}
 .notice .tab-hd li.on{ position: relative; border-bottom: 2px solid #06C1AE;}
 .notice .tab-bd{padding-top: 3%;}
 .notice .tab-hdtwo li{width: 25%;}

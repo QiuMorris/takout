@@ -54,8 +54,8 @@ $sel_list = $mod_sell_photo->select();
                                         <div class="dealcard-brand single-line"><?php echo $value['sel_name']?></div>
                                         <div class="title text-block"><?php echo $value['sel_address']?></div>
                                         <div class="price">
-                                            <span class="strong">9.9</span>
-                                            <span class="strong-color">元起</span>
+<!--                                            <span class="strong">9.9</span>-->
+<!--                                            <span class="strong-color">元起</span>-->
                                             <span class="tag" style="float: right">多优惠+</span>
 <!--                                               <span class="line-right">-->
 <!--                                                已售50293-->

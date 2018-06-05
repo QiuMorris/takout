@@ -1,11 +1,15 @@
 <?php
 session_start();
+include_once 'comm/MysqliModel.class.php';
+include_once 'comm/dbconfig.php';
+
 if(!$_SESSION['user'])
 {
     header('Location: /login.php');//判断登录
 }
 
-//$mod_customer = new MysqliModel('customer');
+$mod_customer = new MysqliModel('customer');
+$cus_exephoto = $mod_customer->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -36,6 +40,10 @@ if(!$_SESSION['user'])
     <script src="slick/slick.js" type="text/javascript" ></script>
 <!--    <link rel="stylesheet" href="css/swiper.min.css">-->
     <script src="layui/layui.js"></script>
+
+    <style>
+        .to{width:80px;height:80px;border-radius:80px}
+    </style>
 
     <script>
         layui.use('upload', function(){
@@ -78,8 +86,12 @@ if(!$_SESSION['user'])
     <div id="main">
         <div class="warp clearfloat">
             <div class="h-top clearfloat box-s">
-                <div class="tu clearfloat fl">
-                    <img src="<?php echo $sel_exephoto['sel_logo']?>" id="select_photo" width="20"/>
+                <div class="clearfloat fl">
+                    <?php if($cus_exephoto['cus_photo']) {?>
+                       <img class="to" src="<?php echo $cus_exephoto['cus_photo']?>" id="select_photo" width="20"/>
+                    <?php } else {?>
+                        <img class="to" src="img/10.png" id="select_photo" width="20"/>
+                    <?php }?>
                 </div>
 
                 <div class="content clearfloat fl">
@@ -122,18 +134,18 @@ if(!$_SESSION['user'])
                             <img src="/img/next.png" width="20" style="margin-left: 250px">
                         </a>
                     </li>
-                    <li class="box-s">
-                        <a href="saler_homepage.php">
-                            <p class="fl">商家主页</p>
-                            <img src="/img/next.png" width="20" style="margin-left: 250px">
-                        </a>
-                    </li>
-                    <li class="box-s">
-                        <a href="del_setup.php">
-                            <p class="fl">骑手主页</p>
-                            <img src="/img/next.png" width="20" style="margin-left: 250px">
-                        </a>
-                    </li>
+<!--                    <li class="box-s">-->
+<!--                        <a href="saler_homepage.php">-->
+<!--                            <p class="fl">商家主页</p>-->
+<!--                            <img src="/img/next.png" width="20" style="margin-left: 250px">-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="box-s">-->
+<!--                        <a href="del_setup.php">-->
+<!--                            <p class="fl">骑手主页</p>-->
+<!--                            <img src="/img/next.png" width="20" style="margin-left: 250px">-->
+<!--                        </a>-->
+<!--                    </li>-->
                 </ul>
             </div>
             <a class="center-btn db ra3" id="login_out">退出登录</a>

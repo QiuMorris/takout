@@ -28,7 +28,7 @@ if($_GET['act'] == 'upStoreuser') {
     $cupath="/upload/".time().$e_name; //存数据库
 
     $data['sel_logo']=$cupath;
-    $re=$mod_seller->updateBy($data,'cus_id', $_SESSION['user']['cus_id']);
+    $re=$mod_seller->updateBy($data,'sel_id', $_SESSION['user']['sel_id']);
 
     $newpath=$path.$cupath;
     if(copy($_FILES['file']['tmp_name'],$newpath))
@@ -63,7 +63,7 @@ else if($_GET['act'] == 'upStore1') {
 
     $cupath="/upload/".time().$e_name; //存数据库
     $data['sel_license']=$cupath;
-    $re=$mod_seller->updateBy($data,'cus_id', $_SESSION['user']['cus_id']);
+    $re=$mod_seller->updateBy($data,'sel_id', $_SESSION['user']['sel_id']);
 
 
     $newpath=$path.$cupath;
@@ -99,7 +99,7 @@ else if($_GET['act'] == 'upStore2') {
 
     $cupath="/upload/".time().$e_name; //存数据库
     $data['sel_photo']=$cupath;
-    $re=$mod_seller->updateBy($data,'cus_id', $_SESSION['user']['cus_id']);
+    $re=$mod_seller->updateBy($data,'sel_id', $_SESSION['user']['sel_id']);
 
     $newpath=$path.$cupath;
     if(copy($_FILES['file']['tmp_name'],$newpath))
@@ -148,13 +148,13 @@ else if($_GET['act'] == 'updateStore') {
     $jsonArr["msg"] = "错误";
     $jsonArr["code"] = 400;
 
-    if($mod_seller->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne()) {
+    if($mod_seller->where(array('sel_id'=>$_SESSION['user']['sel_id']))->selectOne()) {
         $data['sel_name'] = $_POST['sel_name'];
         $data['sel_tel'] = $_POST['sel_tel'];
         $data['sel_info'] = $_POST['sel_info'];
         $data['sel_address'] = $_POST['sel_address'];
 
-        $recus = $mod_seller->updateBy($data,'cus_id',$_SESSION['user']['cus_id']);
+        $recus = $mod_seller->updateBy($data,'sel_id',$_SESSION['user']['sel_id']);
         if ($recus) {
             $jsonArr["msg"] = "更新成功";
             $jsonArr["code"] = 200;
@@ -165,7 +165,7 @@ else if($_GET['act'] == 'updateStore') {
         $data['sel_tel'] = $_POST['sel_tel'];
         $data['sel_info'] = $_POST['sel_info'];
         $data['sel_address'] = $_POST['sel_address'];
-        $data['cus_id'] = $_SESSION['user']['cus_id'];
+
         $recus = $mod_seller->insert($data);
         if ($recus) {
             $jsonArr["msg"] = "更新成功";
@@ -306,7 +306,52 @@ else if($_GET['act'] == 'del-arrive')
     exit;
 }
 
-else if($_GET['act'] == 'add-seller')
-{
+else if($_GET['act'] == 'sel_logout') {
+    unset($_SESSION['user']);
 
+    $jsonArr=array ();
+    $jsonArr["msg"]="成功";
+    $jsonArr["code"]=200;
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act'] == 'updateThingjpg') {
+    $jsonArr=array ();
+    $jsonArr["msg"]="成功";
+    $jsonArr["code"]=200;
+    $path=$_SERVER['DOCUMENT_ROOT'];
+
+    if($_FILES['file']['type']=="image/png")
+    {
+        $e_name=".png";
+    }
+    else
+    {
+        $e_name=".jpg";
+    }
+
+    $cupath="/upload/".time().$e_name; //存数据库
+
+    $data['food_jpg']=$cupath;
+    $data['sel_id']=$_SESSION['user']['sel_id'];
+    $data['food_state']=1;
+    $data['food_num']=100;
+    $re=$mod_food->insert($data);
+
+    $newpath=$path.$cupath;
+    if(copy($_FILES['file']['tmp_name'],$newpath))
+    {
+        $jsonArr["msg"]="成功";
+        $jsonArr["code"]=200;
+        $jsonArr["food_id"]=$re;
+    }
+    else
+    {
+        $jsonArr["msg"]="失败";
+        $jsonArr["code"]=400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
 }

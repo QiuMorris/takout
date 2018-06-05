@@ -6,8 +6,9 @@ include_once 'comm/MysqliModel.class.php';
 $mod_myorder = new MysqliModel('myorder');
 $mod_detail_list = new MysqliModel('detail_list');
 $mod_seller = new MysqliModel('seller');
-$reSel=$mod_seller->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
-$_SESSION['user']['sel_id']=$reSel['sel_id'];
+
+//$reSel=$mod_seller->where(array('sel_id'=>$_SESSION['user']['sel_id']))->selectOne();
+
 
 $order_type=1;
 if($_GET['order_type']>1)
@@ -15,7 +16,7 @@ if($_GET['order_type']>1)
     $order_type=$_GET['order_type'];
 }
 
-$arr_order = $mod_myorder->where(array('sel_id'=>$reSel['sel_id'], 'order_type'=>$order_type))->select();
+$arr_order = $mod_myorder->where(array('order_type'=>$order_type))->select();
 
 foreach ($arr_order as $key=>$value){
     $arr_order[$key]['foodlist']=getfood($value['order_number']);

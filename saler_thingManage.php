@@ -5,7 +5,8 @@ include_once 'comm/dbconfig.php';
 
 $mod_food = new MysqliModel('food');
 $sel_foodlist = $mod_food->where(array('sel_id'=>$_SESSION['user']['sel_id']))->select();
-
+$mod_seller = new MysqliModel('seller');
+$sel_exephoto = $mod_seller->where(array('sel_id'=>$_SESSION['user']['sel_id']))->selectOne();
 //var_dump($sel_foodlist);
 //exit;
 ?>
@@ -49,7 +50,7 @@ $sel_foodlist = $mod_food->where(array('sel_id'=>$_SESSION['user']['sel_id']))->
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a href="javascript:history.go(-1)"class="fl fanhui" href="saler_homepage.php"><img src="img/backw.png" width="20" ></a>
+    <a class="fl fanhui" href="saler_homepage.php"><img src="img/backw.png" width="20" ></a>
     <div class="header-tit">
         菜单管理
     </div>
@@ -58,16 +59,18 @@ $sel_foodlist = $mod_food->where(array('sel_id'=>$_SESSION['user']['sel_id']))->
 <div id="container">
     <div id="main">
         <div class="store-header clearfix">
-            <div class="tu">
-                <img src="img/tou.png"/>
-            </div>
+
+                <div class="tu clearfloat fl">
+                    <?php if($sel_exephoto['sel_logo']) {?>
+                        <img class="to" src="<?php echo $sel_exephoto['sel_logo']?>" id="select_photo" width="80"/>
+                    <?php } else {?>
+                        <img class="to" src="img/10.png" id="select_photo"/>
+                    <?php }?>
+                </div>
+
             <div class="right fl">
                 <p></p>
-                <p class="htel">欢迎回来：18324138828</p>
-            </div>
-            <div class="tit">
-                <span></span>
-                <p>商铺活动最新简介</p>
+                <p class="htel">欢迎回来：<?php echo $_SESSION['user']['sel_account']?>&nbsp;</p>
             </div>
         </div>
         <!--店铺头部结束-->
@@ -82,14 +85,9 @@ $sel_foodlist = $mod_food->where(array('sel_id'=>$_SESSION['user']['sel_id']))->
             <div class="frame-set-left">
                 <ul>
                     <li class="active" rel="all">
-                        <a href="javascript:void(0);">全部分类</a>
+                        <a href="thing_add.php">添加新品</a>
                     </li>
-<!--                    <li rel="cate_1">-->
-<!--                        <a href="javascript:void(0);">饭食类</a>-->
-<!--                    </li>-->
-<!--                    <li rel="cate_2">-->
-<!--                        <a href="javascript:void(0);">自助餐</a>-->
-<!--                    </li>-->
+
                 </ul>
             </div>
             <div class="frame-set-right">

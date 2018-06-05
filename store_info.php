@@ -2,6 +2,9 @@
 session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
+
+$mod_sell_photo = new MysqliModel('seller');
+$sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +83,7 @@ include_once 'comm/dbconfig.php';
         <div class="warp warpthree clearfloat">
             <div class="h-top h-toptwo clearfloat box-s">
                 <p class="tu"><img src="img/touxiang.png" id="test3"/></p>
-                <p class="nr">王小王</p>
+                <p class="nr">头像</p>
             </div>
             <div class="apply clearfloat">
                 <div class="top clearfloat">

@@ -7,10 +7,12 @@ include_once 'comm/MysqliModel.class.php';
 
 $mod_food = new MysqliModel('food');
 $mod_seller = new MysqliModel('seller');
+$mod_assess = new MysqliModel('assess');
 
 $arr_food = $mod_food->where(array('sel_id'=>$_GET['sel_id'], 'food_state'=>1))->select();
 $arr_selinfo = $mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne();
-//var_dump($arr_selinfo);
+$arr_assinfo = $mod_assess->where(array('sel_id'=>$_GET['sel_id']))->select();
+//var_dump($arr_assinfo);
 //exit;
 ?>
 
@@ -125,6 +127,7 @@ $arr_selinfo = $mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne()
                                     <div class="input"><input type="text" class="ordernum" readonly="readonly" value="0" id="num<?php echo $valfood['food_id']?>"></div>
                                     <div class="btn active jq_addcart" val="11.5" did="2" onclick="addcart(<?php echo $valfood['food_id']?>,'add');">+</div>
                                 </div>
+                                <p class="overflow_clear"><?php echo $valfood['food_note']?></p>
                             </div>
                         </div>
 
@@ -189,35 +192,63 @@ $arr_selinfo = $mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne()
 
 <!--评价界面内容-->
     <div id="shangjia_assess" class="page-center-box dldetail" style="display: none">
-        <div class="pldengji">
-            <ul>
-                <li class="cur"><a href="#">好评</a></li>
-                <li><a href="#">中评</a></li>
-                <li><a href="#">差评</a></li>
-            </ul>
-        </div>
+<!--        <div class="pldengji">-->
+<!--            <ul>-->
+<!--                <li class="cur"><a href="#">好评</a></li>-->
+<!--                <li><a href="#">中评</a></li>-->
+<!--                <li><a href="#">差评</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
         <dl class="dealcard">
 
-            <dd class="page-link">
-                <a href="#">
-                    <div class="dealcard-img imgbox"> <img src="img/553b0e254774b.jpg" alt=""> </div>
-                    <div class="dealcard-block-right">
-                        <div class="brand">瑾晨0212<em class="location-right">2016-11-11</em></div>
-                        <div class="title ">
-                                            <span class="star">
-                                                <i class="full"></i>
-                                                <i class="full"></i>
-                                                <i class="full"></i>
-                                                <i class="half"></i>
-                                                <i></i>
-                                            </span>
-                        </div>
-                        <div class="price">
-                            <span>配送速度快质量好配送速度快质量好配送速度快质量好配送速度快质量好</span>
-                        </div>
+            <?php foreach ($arr_assinfo as $key=>$valueAssinfo):?>
+                <dd class="page-link" style="margin: 5px 5px 5px 5px; ">
+                    <div class="dealcard-message box">
+                        用户：<?php echo $valueAssinfo['cus_id']?>
+                        <span style="float: right">
+                            <?php if( $valueAssinfo['assess_type'] == 0) {?>
+                                <?php echo "好评"?>
+                            <?php }else if( $valueAssinfo['assess_type'] == 1) {?>
+                                <?php echo "中评"?>
+                            <?php }else if( $valueAssinfo['assess_type'] == 2) {?>
+                                <?php echo "差评"?>
+                            <?php }?>
+                        </span>
                     </div>
-                </a>
-            </dd>
+                    <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+
+                    <div class="dealcard-message box" style="margin-top: 5px;">
+                        <span style="color: #0EC0A8">评价内容：<?php echo $valueAssinfo['assess_info']?></span>
+                        <div style="border: 0.5px  solid #EFF2F4; margin: 5px 5px;"></div>
+                    </div>
+
+                    <div class="dealcard-message box" >
+                        日期: <?php echo date("Y-m-d H:i", $valueAssinfo['assess_time']);?>
+                    </div>
+
+                </dd>
+            <?php endforeach; ?>
+
+
+<!--            <dd class="page-link">-->
+<!--                <a>-->
+<!--                    <div class="dealcard-block-left">-->
+<!--                        <div class="brand">瑾晨0212<em class="location-right">2016-11-11</em></div>-->
+<!--                        <div class="title ">-->
+<!--                                            <span class="star">-->
+<!--                                                <i class="full"></i>-->
+<!--                                                <i class="full"></i>-->
+<!--                                                <i class="full"></i>-->
+<!--                                                <i class="half"></i>-->
+<!--                                                <i></i>-->
+<!--                                            </span>-->
+<!--                        </div>-->
+<!--                        <div class="price">-->
+<!--                            <span>配送速度快质量好配送速度快质量好配送速度快质量好配送速度快质量好</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            </dd>-->
 
         </dl>
     </div>
@@ -226,9 +257,9 @@ $arr_selinfo = $mod_seller->where(array('sel_id'=>$_GET['sel_id']))->selectOne()
         <div class="detailNr">
             <h3>商家信息</h3>
             <div class="nr mb10">
-                <p>店铺地址：四川省成都市锦江区望江西路与东至路交口</p>
-                <p>店铺联系电话：024-578349753</p>
-                <p>店铺特色：</p>
+                <p>店铺地址：<?php echo $arr_selinfo['sel_address']?></p>
+                <p>店铺联系电话：<?php echo $arr_selinfo['sel_tel']?></p>
+                <p>店铺特色：<?php echo $arr_selinfo['sel_info']?></p>
             </div>
         </div>
     </div>

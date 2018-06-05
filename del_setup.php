@@ -26,13 +26,18 @@ if(!$_SESSION['user'])
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="js/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/swiper.min.js" type="text/javascript" ></script>
     <script src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/mui.min.js"></script>
+    <script type="text/javascript" src="js/hmt.js" ></script>
+
     <script>
         layui.use('upload', function(){
             var upload = layui.upload;
@@ -100,13 +105,29 @@ if(!$_SESSION['user'])
             </ul>
         </div>
 
-        <a href="#" class="center-btn db ra3">退出登录</a>
+        <a id="sel_logout" class="center-btn db ra3">退出登录</a>
     </div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script src="js/fastclick.js"></script>
-<script src="js/mui.min.js"></script>
-<script type="text/javascript" src="js/hmt.js" ></script>
+
+<script>
+    $(document).ready(function(){
+        $("#sel_logout").bind("click",function(){
+            // alert(this);
+            $.post("ajax_seller.php?act=sel_logout",
+                {
+                },
+                function(data){
+                    if(data.code == 200) {
+                        window.location.href = "/login.php";
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                },"JSON");
+        });
+    });
+</script>
+
 </html>
 

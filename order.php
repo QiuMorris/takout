@@ -9,13 +9,20 @@ $mod_seller = new MysqliModel('seller');
 $reSel=$mod_seller->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
 $_SESSION['user']['sel_id']=$reSel['sel_id'];
 
-$order_type=1;
+//$order_type=1;
 if($_GET['order_type']>1)
 {
     $order_type=$_GET['order_type'];
 }
 
-$arr_order = $mod_myorder->where(array('cus_id'=>$_SESSION['user']['cus_id'], 'order_type'=>$order_type))->select();
+$where=array('cus_id'=>$_SESSION['user']['cus_id']);
+if($order_type)
+{
+    $where['order_type']=$order_type;
+
+}
+
+$arr_order = $mod_myorder->where($where)->select();
 
 foreach ($arr_order as $key=>$value){
     $arr_order[$key]['foodlist']=getfood($value['order_number']);
@@ -79,7 +86,8 @@ function getStore($seller_id)
         <div class="notice">
             <div class="tab-hd ">
                 <ul class="tab-nav">
-                    <li class="Newband"><a href="order.php" >已接单</a></li>
+                    <li class="Newband"><a href="order.php" >所有订单</a></li>
+                    <li class="Newband"><a href="order.php?order_type=1" >已接单</a></li>
                     <li class="Waiting"><a href="order.php?order_type=2" >配送中</a></li>
                     <li class="Delivering"><a href="order.php?order_type=3" >已送达</a></li>
                 </ul>

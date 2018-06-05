@@ -32,15 +32,32 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
     <script src="js/mui.min.js"></script>
     <script type="text/javascript" src="js/hmt.js" ></script>
     <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+
     <script>
         layui.use('upload', function(){
             var upload = layui.upload;
 
             var uploadInst = upload.render({
                 elem: '#test1' //绑定元素
-                ,url: '/upload/' //上传接口
-                ,done: function(res){
+                ,url: '/ajax_seller.php?act=updateThingjpg' //上传接口
+                ,done: function(data){
                     //上传完毕回调
+                    if(data.code == 200) {
+                        layer.msg(data.msg);
+                        //    console.log(data.msg);
+                        if(data.food_id >0){
+                            window.location.href='/thing_add.php?food_id='+data.food_id;
+                        }
+                        else{
+                            location.reload();
+                        }
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
                 }
                 ,error: function(){
                     //请求异常回调
@@ -49,12 +66,16 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
         });
     </script>
 
+    <style>
+        .to{width:45px;height:45px;border-radius:80px}
+    </style>
+
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
     <a class="fl fanhui" href="saler_thingManage.php"><img src="img/backw.png" width="20" ></a>
     <div class="header-tit">
-        菜品信息管理中心
+        菜品信息管理中心-添加商品
     </div>
 </header>
 <div id="container" style="margin-top: 50px">
@@ -64,7 +85,15 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
                 <li class="clearfloat touxiang">
                     <a href="#">
                         <p class="fl">菜品照片</p>
-                        <i class="fr"><img id="test1" src="<?php echo $sel_foodlist['food_jpg']?>" /></i>
+
+                        <div class="clearfloat fr">
+                            <?php if($sel_foodlist['food_jpg']) {?>
+                                <i class="fr"> <img class="to" src="<?php echo $sel_foodlist['food_jpg']?>" id="test1" width="20"/></i>
+                            <?php } else {?>
+                                <i class="fr"> <img class="to" id="test1" src="img/add.png" width="20"/></i>
+                            <?php }?>
+                        </div>
+
                     </a>
                 </li>
                 <li class="clearfloat">
@@ -102,7 +131,7 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
 <script>
     $(document).ready(function(){
         $("#save_food").click(function(){
-           // alert('aaa');
+            // alert('aaa');
             var food_name=$("#food_name").val();
             var food_price=$("#food_price").val();
             var food_num=$("#food_num").val();
@@ -114,7 +143,7 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
                 layer.msg('对不起，菜品信息输入不完全！');
                 return ;
             }
-            
+
             $.post("ajax_seller.php?act=save_food",
                 {
                     food_name:food_name,
@@ -136,8 +165,6 @@ $sel_foodlist = $mod_food->where(array('food_id'=>$_GET['food_id']))->selectOne(
     });
 </script>
 </body>
-
-
 
 
 </html>

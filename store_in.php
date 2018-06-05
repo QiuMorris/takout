@@ -5,7 +5,7 @@ include_once 'comm/dbconfig.php';
 
 
 $mod_sell_photo = new MysqliModel('seller');
-$sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectOne();
+$sel_exephoto = $mod_sell_photo->where(array('sel_id'=>$_SESSION['user']['sel_id']))->selectOne();
 //var_dump($sel_exephoto);
 //exit;
 ?>
@@ -91,7 +91,7 @@ $sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id
 </head>
 <body>
 <header class="hasManyCity hasManyCitytwo" id="header">
-    <a class="fl fanhui" href="center.php"><img src="img/backw.png" width="20" ></a>
+    <a class="fl fanhui" href="javascript:history.go(-1)"><img src="img/backw.png" width="20" ></a>
     <div class="header-tit">
         商家入驻
     </div>
@@ -100,14 +100,19 @@ $sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id
     <div id="main">
         <div class="warp warpthree clearfloat">
             <div class="h-top h-toptwo clearfloat box-s">
-                <p class="tu"><img class="to" src="<?php echo $sel_exephoto['sel_logo']?>" id="upStoreuser"/></p>
-                <p class="nr">选择头像</p>
+                <?php if($sel_exephoto['sel_logo']) {?>
+                    <p class="tu"><img class="to" id="upStoreuser" src="<?php echo $sel_exephoto['sel_logo']?>" width="20"/></p>
+                <?php } else {?>
+                    <p class="tu"><img class="to" id="upStoreuser" src="img/10.png" width="20"/></p>
+                <?php }?>
+<!--                <img class="to" src="--><?php //echo $sel_exephoto['sel_logo']?><!--" id="upStoreuser"/></p>-->
+<!--                <p class="nr">选择头像</p>-->
             </div>
             <div class="apply clearfloat">
                 <div class="top clearfloat">
                     <ul>
                         <?php if($sel_exephoto['sel_license']){ ?>
-                            <img id="upStore1" src="<?php echo $sel_exephoto[sel_license] ?>" width="162" height="122" />';
+                            <img id="upStore1" src="<?php echo $sel_exephoto['sel_license'] ?>" width="162" height="122" />';
                         <?php }else{?>
                         <li class="fl ra3" id="upStore1">
                             <img src="img/jia.png" width="30">
@@ -115,7 +120,7 @@ $sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id
                         </li>
                         <?php }?>
                         <?php if($sel_exephoto['sel_photo']){ ?>
-                            <img id="upStore2" src="<?php echo $sel_exephoto[sel_photo] ?>" width="162" height="122" />';
+                            <img id="upStore2" src="<?php echo $sel_exephoto['sel_photo'] ?>" width="162" height="122" />';
                         <?php }else{?>
 
                         <li class="fr ra3" id="upStore2">
@@ -131,26 +136,26 @@ $sel_exephoto = $mod_sell_photo->where(array('cus_id'=>$_SESSION['user']['cus_id
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家名称：</p>
-                                <input type="text" id="sel_name" value="" placeholder="" />
+                                <input type="text" id="sel_name" value="<?php echo $sel_exephoto['sel_name'] ?>" placeholder="请输入商家名称" />
                             </div>
                         </li>
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家地址：</p>
-                                <input type="text" id="sel_address" value="" placeholder="" />
+                                <input type="text" id="sel_address" value="<?php echo $sel_exephoto['sel_address'] ?>" placeholder="请输入商家地址" />
                             </div>
                         </li>
                         <li>
                             <div class="box-s clearfloat">
                                 <p>联系电话：</p>
-                                <input type="text" id="sel_tel" value="" placeholder="" />
+                                <input type="text" id="sel_tel" value="<?php echo $sel_exephoto['sel_tel'] ?>" placeholder="请输入店铺联系电话" />
                             </div>
                         </li>
 
                         <li>
                             <div class="box-s clearfloat">
                                 <p>商家描述：</p>
-                                <input type="text" id="sel_info" value="" placeholder="" />
+                                <input type="text" id="sel_info" value="<?php echo $sel_exephoto['sel_name'] ?>" placeholder="请输入商家描述" />
                             </div>
                         </li>
                     </ul>

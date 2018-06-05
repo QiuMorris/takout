@@ -5,9 +5,11 @@ include_once 'comm/dbconfig.php';
 
 if(!$_SESSION['user'])
 {
-    header('Location: /saler_homepage.php');
+    header('Location: /login.php');
 }
 
+$mod_seller = new MysqliModel('seller');
+$sel_exephoto = $mod_seller->where(array('sel_id'=>$_SESSION['user']['sel_id']))->selectOne();
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ if(!$_SESSION['user'])
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" href="css/reset.css">
-
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <script type="text/javascript" src="js/iscroll.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script src="js/hmt.js" type="text/javascript"></script>
@@ -36,9 +38,39 @@ if(!$_SESSION['user'])
     <script src="js/others.js"></script>
     <script type="text/javascript" src="js/hmt.js" ></script>
     <script src="slick/slick.js" type="text/javascript" ></script>
-    <!--插件-->
+
     <link rel="stylesheet" href="css/swiper.min.css">
     <script src="js/swiper.jquery.min.js"></script>
+    <script src="layui/layui.js"></script>
+
+    <style>
+        .to{width:80px;height:80px;border-radius:80px}
+    </style>
+
+    <script>
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            var uploadInst = upload.render({
+                elem: '#sel_photo' //绑定元素
+                ,url: '/ajax_seller.php?act=upStoreuser' //上传接口
+                ,done: function(data){
+                    //上传完毕回调
+                    if(data.code == 200) {
+                        layer.msg(data.msg);
+                        //    console.log(data.msg);
+                        location.reload();
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <!--header star-->
@@ -53,12 +85,17 @@ if(!$_SESSION['user'])
     <div id="main">
         <div class="warp clearfloat">
             <div class="h-top clearfloat box-s">
-                <div class="tu clearfloat fl">
-                    <img src="img/touxiang.png"/>
+                <div class="clearfloat fl">
+                    <?php if($sel_exephoto['sel_photo']) {?>
+                        <img class="to" src="<?php echo $sel_exephoto['sel_logo']?>" id="sel_photo" width="20"/>
+                    <?php } else {?>
+                        <img class="to" src="img/10.png" id="sel_photo" width="20"/>
+                    <?php }?>
                 </div>
                 <div class="content clearfloat fl">
-                    <p class="hname">麦当劳（龙湖时代天街店）</p>
-                    <p class="htel">状态：营业中</p>
+                    <p class="hname"><?php echo $_SESSION['user']['sel_account']?>&nbsp;</p>
+                    <p class="hname">欢迎您！</p>
+
                 </div>
             </div>
             <div class="cash clearfloat">
@@ -76,12 +113,12 @@ if(!$_SESSION['user'])
                                 <span>商品管理</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="store_info.php">
-                                <img src="img/group3.png" width="30" height="30"/>
-                                <span>门店信息</span>
-                            </a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a href="store_info.php">-->
+<!--                                <img src="img/group3.png" width="30" height="30"/>-->
+<!--                                <span>门店信息</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
                         <li>
                             <a href="lookassess.php">
                                 <img src="img/pingjia.png" width="30" height="30"/>
@@ -94,18 +131,43 @@ if(!$_SESSION['user'])
                                 <span>我的钱包</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="store_in.php">
+                                <img src="img/group3.png" width="30" height="30"/>
+                                <span>我的店铺</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
 
 
-            <a href="#" class="center-btn db ra3">退出登录</a>
+            <a id="sel_logout" class="center-btn db ra3">退出登录</a>
         </div>
     </div>
 </div>
 
 
 </body>
+
+<script>
+    $(document).ready(function(){
+        $("#sel_logout").bind("click",function(){
+            // alert(this);
+            $.post("ajax_seller.php?act=sel_logout",
+                {
+                },
+                function(data){
+                    if(data.code == 200) {
+                        window.location.href = "/login.php";
+                    }
+                    else {
+                        layer.msg(data.msg);
+                    }
+                },"JSON");
+        });
+    });
+</script>
 
 </html>
 
