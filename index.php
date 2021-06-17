@@ -3,10 +3,15 @@ session_start();
 include_once 'comm/MysqliModel.class.php';
 include_once 'comm/dbconfig.php';
 
+
+header('Location: /tuan.php');
+exit;//判断登录
+
+
 $mod_seller = new MysqliModel('seller');
 $arr_selinfo = $mod_seller->select();
-var_dump($arr_selinfo);
-exit;
+//var_dump($arr_selinfo);
+//exit;
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">

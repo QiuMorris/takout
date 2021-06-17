@@ -37,6 +37,7 @@ if(!$_SESSION['user'])
     <script src="js/fastclick.js"></script>
     <script src="js/mui.min.js"></script>
     <script type="text/javascript" src="js/hmt.js" ></script>
+    <script src="layui/layui.js"></script>
 
     <script>
         layui.use('upload', function(){
@@ -79,7 +80,7 @@ if(!$_SESSION['user'])
                     </a>
                 </li>
                 <li class="clearfloat">
-                    <a href="#">
+                    <a onClick="locate()">
                         <p class="fl">我的定位</p>
                         <img src="/img/next.png" width="20" style="margin-left: 242px; margin-top: 15px">
                     </a>
@@ -127,6 +128,18 @@ if(!$_SESSION['user'])
                 },"JSON");
         });
     });
+
+    function locate() {
+        // alert("aaaaaaaaaaaa");
+        JSObject.startLoc('MSG_LOCATION_START');
+    }
+    function geoCallBack(json)
+    {
+        // alert(json);
+        var adde=JSON.parse(json);
+        layer.msg(adde.address);
+    }
+
 </script>
 
 </html>

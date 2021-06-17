@@ -319,6 +319,15 @@ else if($_GET['act'] == 'out_order') {
     echo json_encode($jsonArr);
     exit;
 }
+//else if($_GET['act'] == 'normalAdd') {
+//    $jsonArr=array ();
+//    $jsonArr["msg"]="成功";
+//    $jsonArr["code"]=200;
+//
+//    $data['is_default'] = 1;
+//    $_SESSION['cus_id'] = $_POST['user'][];
+//}
+
 else if($_GET['act'] == 'select_photo') {
     $jsonArr=array ();
     $jsonArr["msg"]="成功";

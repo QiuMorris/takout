@@ -25,6 +25,7 @@ $redel=$mod_del->select();
 		<link href="css/css.css" type="text/css" rel="stylesheet" />
 		<link href="css/main.css" type="text/css" rel="stylesheet" />
 		<link rel="shortcut icon" href="images/main/favicon.ico" />
+        <script src="/js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<style>
 			body {
 				overflow-x: hidden;
@@ -197,7 +198,7 @@ $redel=$mod_del->select();
                                 <td align="center" valign="middle" class="borderright borderbottom"><?php echo $value['cus_tel']?></td>
                                 <td align="center" valign="middle" class="borderbottom">
 <!--                                    <a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span>-->
-                                    <a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a>
+                                    <a target="mainFrame" onclick="delete_add(<?php echo $value['cus_id'] ?>)"  class="add">删除</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -206,14 +207,30 @@ $redel=$mod_del->select();
 				</td>
 			</tr>
 			<tr>
-				<td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;
-					<a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
-					<a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-					<a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-					<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a>
-				</td>
+<!--				<td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;-->
+<!--					<a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;-->
+<!--					<a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;-->
+<!--					<a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;-->
+<!--					<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a>-->
+<!--				</td>-->
 			</tr>
 		</table>
 	</body>
 
+    <script>
+        function delete_add(id) {
+            $.post("/ajax_guanliyuan.php?act=delete_add",
+                {
+                    cus_id:id,
+                },
+                function(data,status){
+                    if(data.code == 200) {
+                        location.reload();
+                    }
+                    else {
+                        layer.msg(data.msg)
+                    }
+                },"JSON");
+        }
+    </script>
 </html>

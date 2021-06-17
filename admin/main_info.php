@@ -6,6 +6,7 @@
 		<link href="css/css.css" type="text/css" rel="stylesheet" />
 		<link href="css/main.css" type="text/css" rel="stylesheet" />
 		<link rel="shortcut icon" href="images/main/favicon.ico" />
+        <script src="/js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<style>
 			body {
 				overflow-x: hidden;

@@ -33,3 +33,45 @@ if($_GET['act']=='login') {
     echo json_encode($jsonArr);
     exit;
 }
+else if($_GET['act']=='delete_add') {
+    $mod_customer = new MysqliModel('customer');
+    $re = $mod_customer->delete($_POST['cus_id']);
+    if ($re) {
+        $jsonArr["msg"]="操作成功";
+        $jsonArr["code"]=200;
+    } else {
+        $jsonArr["msg"]="错误";
+        $jsonArr["code"]=400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act']=='delete_sel') {
+    $mod_sel = new MysqliModel('seller');
+    $re = $mod_sel->delete($_POST['sel_id']);
+    if ($re) {
+        $jsonArr["msg"]="操作成功";
+        $jsonArr["code"]=200;
+    } else {
+        $jsonArr["msg"]="错误";
+        $jsonArr["code"]=400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}
+else if($_GET['act']=='delete_del') {
+    $mod_del = new MysqliModel('deliver');
+    $re = $mod_del->delete($_POST['del_id']);
+    if ($re) {
+        $jsonArr["msg"]="操作成功";
+        $jsonArr["code"]=200;
+    } else {
+        $jsonArr["msg"]="错误";
+        $jsonArr["code"]=400;
+    }
+
+    echo json_encode($jsonArr);
+    exit;
+}

@@ -10,7 +10,7 @@ $reSel=$mod_seller->where(array('cus_id'=>$_SESSION['user']['cus_id']))->selectO
 $_SESSION['user']['sel_id']=$reSel['sel_id'];
 
 //$order_type=1;
-if($_GET['order_type']>1)
+if($_GET['order_type']>0)
 {
     $order_type=$_GET['order_type'];
 }
@@ -105,7 +105,7 @@ function getStore($seller_id)
                                         订单号：<?php echo $valueOrder['order_number']?>
 
                                         <?php if($order_type==1){?>
-                                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px" onclick="message();"> 催单 </button>
+                                            <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px" onclick="message();"> 已接单 </button>
                                         <?php }elseif($order_type==2){?>
                                             <button class="layui-btn layui-btn-xs layui-btn-normal layui-btn-danger" style="float: right; padding-left: 16px; padding-right: 16px"> 配送中 </button>
                                         <?php }elseif($order_type==3){?>
